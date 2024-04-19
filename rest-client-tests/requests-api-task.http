@@ -1,0 +1,27 @@
+###
+GET http://127.0.0.1:5000/api/v1.0/task/all HTTP/1.1
+content-type: application/json
+
+###
+POST http://127.0.0.1:5000/api/v1.0/task HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "New api/v1.0/task"
+}
+
+###
+GET http://127.0.0.1:5000/api/v1.0/task/1 HTTP/1.1
+content-type: application/json
+
+###
+DELETE http://127.0.0.1:5000/api/v1.0/task/1 HTTP/1.1
+content-type: application/json
+
+###
+PUT http://127.0.0.1:5000/api/v1.0/task/1 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "New api/v1.0/task"
+}
