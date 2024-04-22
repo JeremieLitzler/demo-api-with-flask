@@ -1,13 +1,12 @@
 from flask import jsonify, request
 from pathlib import Path
-
 import sqlite3
 import os
-import json
 import uuid
+
+from dto.ProjectDto import ProjectDto
 from utils.validators import validate_required_properties
 from utils.reflection import get_tuple_from_type
-from dto.ProjectDto import ProjectDto
 
 def create_project(project_data: ProjectDto) -> None:
   # Replace 'project_data.db' with your desired database filename
@@ -21,22 +20,23 @@ def create_project(project_data: ProjectDto) -> None:
                       id TEXT PRIMARY KEY,
                       name TEXT NOT NULL,
                       color TEXT NOT NULL,
-                      isArchived INTEGER NOT NULL
+                      isArchived INTEGER NOT NULL DEFAULT 0
                     )''')
 
     # Escape single quotes in data if necessary (see note below)
     name = project_data.name.replace("'", "''")
     color = project_data.color.replace("'", "''")
-    is_archived = int(project_data.isArchived)  # Convert bool to int for database
+    is_archived = int(False if project_data.isArchived == None else project_data.isArchived)  # Convert bool to int for database
 
     cursor.execute('''INSERT INTO projects (id, name, color, isArchived)
                       VALUES (?, ?, ?, ?)''',
                     (project_data.id, name, color, is_archived))
 
-    # ... (rest of your code)
-
     conn.commit()
-    return jsonify({'id': f'{project_data.id}', 'success': 'true', 'error': 'null'})
+    rows_affected = cursor.rowcount
+    # Return True if at least one row was added
+    message = 'null' if rows_affected > 0 else 'No record affected' 
+    return jsonify({'id': f'{project_data.id}', 'success': f'{rows_affected > 0}', 'message': f'{message}'})  
   finally:  
     conn.close()
   
@@ -112,7 +112,8 @@ def delete_project(id: str) -> bool:
 
     # Check if any rows were affected (i.e., if a project was deleted)
     rows_affected = cursor.rowcount
-    return rows_affected > 0  # Return True if at least one row was deleted
+    message = 'null' if rows_affected > 0 else 'No record affected' 
+    return jsonify({'id': f'{id}', 'success': f'{rows_affected > 0}', 'message': f'{message}'})  
 
   finally:
     conn.close()
