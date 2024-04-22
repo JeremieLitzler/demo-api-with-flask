@@ -1,4 +1,9 @@
-class ProjectData:
+class ProjectDto:
+  id: str | None 
+  name: str
+  color: str
+  isArchived: bool
+  
   def __init__(self, name: str, color: str, isArchived: bool = False):
     self.id = None  # This will be assigned during project creation
     self.name = name

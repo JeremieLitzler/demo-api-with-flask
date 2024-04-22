@@ -3,7 +3,7 @@ import json
 
 from app import app
 from services.service_project import *
-from dto.ProjectData import ProjectData
+from dto.ProjectDto import ProjectDto
 
 @app.route('/api/v1.0/project', methods=['POST'])
 def api_project_add():
@@ -11,7 +11,7 @@ def api_project_add():
     name = project_data.get('name')
     color = project_data.get('color')
     isArchived = project_data.get('isArchived', False)
-    new_project = ProjectData(name, color, isArchived)
+    new_project = ProjectDto(name, color, isArchived)
     return create_project(new_project)
 
 @app.route('/api/v1.0/project/all', methods=['GET'])
@@ -25,8 +25,7 @@ def api_project_get_all():
 def api_project_get(id: int):
   project = get_project(id)
   if project:
-    project_dict = {'id': project.id, 'name': project.name, 'color': project.color, 'isArchived': bool(project.isArchived)}
-    return jsonify(project_dict)
+    return jsonify(project._asdict())
   else:
     return jsonify({'error': 'Project not found'}), 404
 

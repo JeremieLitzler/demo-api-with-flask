@@ -20,9 +20,9 @@ DELETE http://127.0.0.1:5000/api/v1.0/project/1 HTTP/1.1
 content-type: application/json
 
 ###
-PUT http://127.0.0.1:5000/api/v1.0/project/1 HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/project/6964ba78-8dc4-4f23-b525-a0d9fbab865c HTTP/1.1
 content-type: application/json
 
 {
-  "name": "New api/v1.0/project"
+  "name": "New Project edited"
 }

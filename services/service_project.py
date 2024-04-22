@@ -1,19 +1,15 @@
 from flask import jsonify, request
 from pathlib import Path
-from collections import namedtuple
 
 import sqlite3
 import os
 import json
 import uuid
 from utils.validators import validate_required_properties
-from utils.json_utils import toJSON
+from utils.reflection import get_tuple_from_type
+from dto.ProjectDto import ProjectDto
 
-from dto.ProjectData import ProjectData
-
-ProjectRecord = namedtuple('ProjectRecord', ['id', 'name', 'color', 'isArchived'])
-
-def create_project(project_data: ProjectData) -> None:
+def create_project(project_data: ProjectDto) -> None:
   # Replace 'project_data.db' with your desired database filename
   try:
     conn = sqlite3.connect(f'db{os.sep}database_sqllite3.db')
@@ -44,12 +40,13 @@ def create_project(project_data: ProjectData) -> None:
   finally:  
     conn.close()
   
-def get_project(project_id: str) -> ProjectData:
+def get_project(project_id: str) -> ProjectDto:
   try:
     conn = sqlite3.connect(f'db{os.sep}database_sqllite3.db')
     cursor = conn.cursor()
     cursor.execute('''SELECT id, name, color, isArchived FROM projects WHERE id = ?''', (project_id,))
     project_data = cursor.fetchone()
+    ProjectRecord = get_tuple_from_type(ProjectDto)  # Get namedtuple type dynamically
 
     if project_data:
       return ProjectRecord(*project_data)  # Unpack data using * operator
@@ -59,7 +56,7 @@ def get_project(project_id: str) -> ProjectData:
   finally:  
     conn.close()
     
-def get_projects() -> list[ProjectRecord]:
+def get_projects() -> list[ProjectDto]:
   try:
     conn = sqlite3.connect(f'db{os.sep}database_sqllite3.db')
     cursor = conn.cursor()
@@ -67,7 +64,7 @@ def get_projects() -> list[ProjectRecord]:
     cursor.execute('''SELECT id, name, color, isArchived FROM projects''')
     project_data = cursor.fetchall()
 
-    conn.close()
+    ProjectRecord = get_tuple_from_type(ProjectDto)  # Get namedtuple type dynamically
 
     projects = []
     for row in project_data:
