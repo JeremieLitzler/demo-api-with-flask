@@ -16,10 +16,6 @@ GET http://127.0.0.1:5000/api/v1.0/project/6964ba78-8dc4-4f23-b525-a0d9fbab865c 
 content-type: application/json
 
 ###
-DELETE http://127.0.0.1:5000/api/v1.0/project/1 HTTP/1.1
-content-type: application/json
-
-###
 PUT http://127.0.0.1:5000/api/v1.0/project/6964ba78-8dc4-4f23-b525-a0d9fbab865c HTTP/1.1
 content-type: application/json
 
@@ -32,6 +28,10 @@ PUT http://127.0.0.1:5000/api/v1.0/project/6964ba78-8dc4-4f23-b525-a0d9fbab865c 
 content-type: application/json
 
 {
-  "name": "New Project edited 2",
-  "color": "#ff0000"
+  "name": "New Project edited 3",
+  "color": "#ff00ff"
 }
+
+###
+DELETE http://127.0.0.1:5000/api/v1.0/project/6964ba78-8dc4-4f23-b525-a0d9fbab865c HTTP/1.1
+content-type: application/json

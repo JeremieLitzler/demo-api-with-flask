@@ -100,4 +100,19 @@ def update_project(project_data: ProjectDto) -> None:
     return updated_project
   finally:  
     conn.close()
- 
+
+def delete_project(id: str) -> bool:
+  try:
+    conn = sqlite3.connect(f'db{os.sep}database_sqllite3.db')
+    cursor = conn.cursor()
+
+    query = f"DELETE FROM projects WHERE id = ?"
+    cursor.execute(query, (id,))
+    conn.commit()
+
+    # Check if any rows were affected (i.e., if a project was deleted)
+    rows_affected = cursor.rowcount
+    return rows_affected > 0  # Return True if at least one row was deleted
+
+  finally:
+    conn.close()

@@ -25,11 +25,6 @@ def api_project_get(id: int):
   else:
     return jsonify({'error': 'Project not found'}), 404
 
-@app.route('/api/v1.0/project/<string:id>', methods=['DELETE'])
-def api_project_delete(id):
-    # Logic to fetch specific project by ID
-    return jsonify({'id': f'{id}', 'success': 'true', 'error': 'null'})
-
 @app.route('/api/v1.0/project/<string:id>', methods=['PUT'])
 def api_project_update(id):
     # Logic to update a specific project by ID
@@ -39,3 +34,9 @@ def api_project_update(id):
 
     updated_project = update_project(ProjectDto.parseJson(data, id))
     return jsonify(updated_project._asdict())
+
+@app.route('/api/v1.0/project/<string:id>', methods=['DELETE'])
+def api_project_delete(id):
+    result = delete_project(id)
+    error = result if 'null' else 'No record affected' 
+    return jsonify({'id': f'{id}', 'success': f'{result}', 'error': f'{error}'})
