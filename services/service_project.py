@@ -11,6 +11,8 @@ from utils.json_utils import toJSON
 
 from dto.ProjectData import ProjectData
 
+ProjectRecord = namedtuple('ProjectRecord', ['id', 'name', 'color', 'isArchived'])
+
 def create_project(project_data: ProjectData) -> None:
   # Replace 'project_data.db' with your desired database filename
   try:
@@ -43,7 +45,6 @@ def create_project(project_data: ProjectData) -> None:
     conn.close()
   
 def get_project(project_id: str) -> ProjectData:
-  ProjectRecord = namedtuple('ProjectRecord', ['id', 'name', 'color', 'isArchived'])
   try:
     conn = sqlite3.connect(f'db{os.sep}database_sqllite3.db')
     cursor = conn.cursor()
@@ -55,5 +56,22 @@ def get_project(project_id: str) -> ProjectData:
     else:
       return None
 
+  finally:  
+    conn.close()
+    
+def get_projects() -> list[ProjectRecord]:
+  try:
+    conn = sqlite3.connect(f'db{os.sep}database_sqllite3.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''SELECT id, name, color, isArchived FROM projects''')
+    project_data = cursor.fetchall()
+
+    conn.close()
+
+    projects = []
+    for row in project_data:
+      projects.append(ProjectRecord(*row))  # Unpack data using * operator for each row
+    return projects
   finally:  
     conn.close()

@@ -16,8 +16,9 @@ def api_project_add():
 
 @app.route('/api/v1.0/project/all', methods=['GET'])
 def api_project_get_all():
-    # Fetch data from a database or other source
-    return jsonify()  # Convert data to JSON format
+  projects = get_projects()
+  project_dicts = [project._asdict() for project in projects]  # Convert to dictionaries
+  return jsonify(project_dicts)
 
     
 @app.route('/api/v1.0/project/<string:id>', methods=['GET'])
