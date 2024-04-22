@@ -72,3 +72,32 @@ def get_projects() -> list[ProjectDto]:
     return projects
   finally:  
     conn.close()
+
+def update_project(project_data: ProjectDto) -> None:
+  try:
+    conn = sqlite3.connect(f'db{os.sep}database_sqllite3.db')
+    cursor = conn.cursor()   
+    # Get attribute names with non-None values
+    attrs_to_update = [attr for attr in vars(project_data).keys() if vars(project_data)[attr] is not None]
+
+    # Build the SET clause dynamically based on non-None attributes
+    set_clause = ", ".join([f"{attr} = ?" for attr in attrs_to_update])
+
+    # Prepare the update query with placeholders for non-None values
+    update_query = f"UPDATE projects SET {set_clause} WHERE id = ?"
+
+    # Extract values from the project_data object based on the selected attributes
+    values = [getattr(project_data, attr) for attr in attrs_to_update]
+    values.append(project_data.id)  # Add ID for WHERE clause
+
+    # Execute the update query with filtered values
+    cursor.execute(update_query, values)
+
+    conn.commit()
+
+    # Retrieve the updated data using get_project (assuming it exists)
+    updated_project = get_project(project_data.id)
+    return updated_project
+  finally:  
+    conn.close()
+ 

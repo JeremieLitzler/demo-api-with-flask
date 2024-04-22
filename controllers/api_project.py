@@ -7,12 +7,8 @@ from dto.ProjectDto import ProjectDto
 
 @app.route('/api/v1.0/project', methods=['POST'])
 def api_project_add():
-    project_data = request.get_json()
-    name = project_data.get('name')
-    color = project_data.get('color')
-    isArchived = project_data.get('isArchived', False)
-    new_project = ProjectDto(name, color, isArchived)
-    return create_project(new_project)
+    data = request.get_json()
+    return create_project(ProjectDto.parseJson(data))
 
 @app.route('/api/v1.0/project/all', methods=['GET'])
 def api_project_get_all():
@@ -37,14 +33,9 @@ def api_project_delete(id):
 @app.route('/api/v1.0/project/<string:id>', methods=['PUT'])
 def api_project_update(id):
     # Logic to update a specific project by ID
-    data = request.json
+    data = request.get_json()
     if not data:
-        return jsonify({'error': 'Invalid JSON data'}), 400
+        return jsonify({'error': 'No JSON data'}), 400
 
-    # Process the data (e.g., access values):
-    name = data.get('name')
-
-    # TODO: And add the new record to a db
-    
-    # Return the data
-    return jsonify({'id': f'{id}', 'success': 'true', 'error': 'null'})
+    updated_project = update_project(ProjectDto.parseJson(data, id))
+    return jsonify(updated_project._asdict())

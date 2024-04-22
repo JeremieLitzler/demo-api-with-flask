@@ -7,7 +7,7 @@ POST http://127.0.0.1:5000/api/v1.0/project HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "New Project",
+  "name": "Project 4",
   "color": "#000000"
 }
 
@@ -25,4 +25,13 @@ content-type: application/json
 
 {
   "name": "New Project edited"
+}
+
+###
+PUT http://127.0.0.1:5000/api/v1.0/project/6964ba78-8dc4-4f23-b525-a0d9fbab865c HTTP/1.1
+content-type: application/json
+
+{
+  "name": "New Project edited 2",
+  "color": "#ff0000"
 }
