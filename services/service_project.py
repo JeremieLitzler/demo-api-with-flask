@@ -8,6 +8,9 @@ from dto.ProjectDto import ProjectDto
 from utils.validators import validate_required_properties
 from utils.reflection import get_tuple_from_type
 
+def get_response_json(id: int, success: bool, message:str = 'null'):
+  return jsonify({'id': f'{id}', 'success': f'{success}', 'message': f'{message}'})  
+
 def create_project(project_data: ProjectDto) -> None:
   # Replace 'project_data.db' with your desired database filename
   try:
@@ -36,7 +39,7 @@ def create_project(project_data: ProjectDto) -> None:
     rows_affected = cursor.rowcount
     # Return True if at least one row was added
     message = 'null' if rows_affected > 0 else 'No record affected' 
-    return jsonify({'id': f'{project_data.id}', 'success': f'{rows_affected > 0}', 'message': f'{message}'})  
+    return get_response_json(project_data.id, rows_affected > 0, message)  
   finally:  
     conn.close()
   
@@ -49,9 +52,10 @@ def get_project(project_id: str) -> ProjectDto:
     ProjectRecord = get_tuple_from_type(ProjectDto)  # Get namedtuple type dynamically
 
     if project_data:
-      return ProjectRecord(*project_data)  # Unpack data using * operator
+      project = ProjectRecord(*project_data)
+      return jsonify(project._asdict())
     else:
-      return None
+      return jsonify({'message': 'Project not found'}), 404
 
   finally:  
     conn.close()
@@ -96,8 +100,13 @@ def update_project(project_data: ProjectDto) -> None:
     conn.commit()
 
     # Retrieve the updated data using get_project (assuming it exists)
-    updated_project = get_project(project_data.id)
-    return updated_project
+    project = get_project(project_data.id)
+    
+    if project:
+      return project
+    else:
+      return jsonify({'message': 'Project not found'}), 404
+  
   finally:  
     conn.close()
 
@@ -113,7 +122,7 @@ def delete_project(id: str) -> bool:
     # Check if any rows were affected (i.e., if a project was deleted)
     rows_affected = cursor.rowcount
     message = 'null' if rows_affected > 0 else 'No record affected' 
-    return jsonify({'id': f'{id}', 'success': f'{rows_affected > 0}', 'message': f'{message}'})  
+    return get_response_json(id, rows_affected > 0, message)  
 
   finally:
     conn.close()

@@ -20,11 +20,8 @@ def api_project_get_all():
     
 @app.route('/api/v1.0/project/<string:id>', methods=['GET'])
 def api_project_get(id: int):
-  project = get_project(id)
-  if project:
-    return jsonify(project._asdict())
-  else:
-    return jsonify({'error': 'Project not found'}), 404
+  response = get_project(id)
+  return response
 
 @app.route('/api/v1.0/project/<string:id>', methods=['PUT'])
 def api_project_update(id):
@@ -33,8 +30,8 @@ def api_project_update(id):
   if not data:
       return jsonify({'error': 'No JSON data'}), 400
 
-  updated_project = update_project(ProjectDto.parseJson(data, id))
-  return jsonify(updated_project._asdict())
+  response = update_project(ProjectDto.parseJson(data, id))
+  return response
 
 @app.route('/api/v1.0/project/<string:id>', methods=['DELETE'])
 def api_project_delete(id):
