@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from constants.environment_vars import EnvironmentVariable
 
 # from dal.main import init_engine
-from dal.main import init_database, init_engine
+from dal.main import init_database, reset_database, init_engine
 
 load_dotenv()
 
@@ -35,7 +35,7 @@ if env == "dev":
     app.config[EnvironmentVariable.SESSION_LOCAL] = SessionLocal
 
     # TODO: drop the database
-
+    reset_database(BASE_DIR)
     # TODO: and recreate it
     init_database(BASE_DIR)
 

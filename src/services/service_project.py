@@ -7,8 +7,8 @@ import uuid
 from dto.ProjectDto import ProjectDto
 from utils.validators import validate_required_properties
 from utils.reflection import get_tuple_from_type
-from app import app
 import dal.dal_project as dal_project
+from dal.models import Project
 
 
 def get_response_json(id: int, success: bool, message: str = "null"):
@@ -17,42 +17,16 @@ def get_response_json(id: int, success: bool, message: str = "null"):
 
 def create_project(project_data: ProjectDto) -> None:
 
-    # Replace 'project_data.db' with your desired database filename
     try:
-        conn = sqlite3.connect(f"db{os.sep}database_sqllite3.db")
-        cursor = conn.cursor()
+        # Replace 'project_data.db' with your desired database filename
+        newProject = Project(name=project_data.name, color=project_data.color)
+        dal_project.add(newProject)
 
-        project_data.id = str(uuid.uuid4())
-
-        cursor.execute(
-            """CREATE TABLE IF NOT EXISTS projects (
-                      id TEXT PRIMARY KEY,
-                      name TEXT NOT NULL,
-                      color TEXT NOT NULL,
-                      isArchived INTEGER NOT NULL DEFAULT 0
-                    )"""
-        )
-
-        # Escape single quotes in data if necessary (see note below)
-        name = project_data.name.replace("'", "''")
-        color = project_data.color.replace("'", "''")
-        is_archived = int(
-            False if project_data.isArchived == None else project_data.isArchived
-        )  # Convert bool to int for database
-
-        cursor.execute(
-            """INSERT INTO projects (id, name, color, isArchived)
-                      VALUES (?, ?, ?, ?)""",
-            (project_data.id, name, color, is_archived),
-        )
-
-        conn.commit()
-        rows_affected = cursor.rowcount
         # Return True if at least one row was added
-        message = "null" if rows_affected > 0 else "No record affected"
-        return get_response_json(project_data.id, rows_affected > 0, message)
-    finally:
-        conn.close()
+        message = "null" if True else "No record affected"
+        return get_response_json(newProject.id, True, message)
+    except Exception as ex:
+        return get_response_json("", False, ex.with_traceback)
 
 
 def get_project(project_id: str) -> ProjectDto:

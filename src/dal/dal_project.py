@@ -10,6 +10,12 @@ from dal.models import Project
 session_db = app.config[EnvironmentVariable.SESSION_LOCAL]
 
 
+def add(project: Project):
+    session_db.add(project)
+    session_db.commit()
+    print(f"Inserted {project.name} to the DB")
+
+
 def fetchAll():
     result = session_db.query(Project).all()
     return result
