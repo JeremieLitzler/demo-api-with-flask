@@ -7,6 +7,8 @@ import uuid
 from dto.ProjectDto import ProjectDto
 from utils.validators import validate_required_properties
 from utils.reflection import get_tuple_from_type
+from app import app
+import dal.dal_project as dal_project
 
 
 def get_response_json(id: int, success: bool, message: str = "null"):
@@ -78,24 +80,20 @@ def get_project(project_id: str) -> ProjectDto:
 
 def get_projects() -> list[ProjectDto]:
     try:
-        conn = sqlite3.connect(f"db{os.sep}database_sqllite3.db")
-        cursor = conn.cursor()
-
-        cursor.execute("""SELECT id, name, color, isArchived FROM projects""")
-        project_data = cursor.fetchall()
+        projects = dal_project.fetchAll()
 
         ProjectRecord = get_tuple_from_type(
             ProjectDto
         )  # Get namedtuple type dynamically
 
         projects = []
-        for row in project_data:
+        for record in projects:
             projects.append(
-                ProjectRecord(*row)
+                ProjectRecord(*record)
             )  # Unpack data using * operator for each row
         return projects
     finally:
-        conn.close()
+        print("finished calling get_projects")
 
 
 def update_project(project_data: ProjectDto) -> None:

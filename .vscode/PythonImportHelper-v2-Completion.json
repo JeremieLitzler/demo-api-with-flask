@@ -1,0 +1,854 @@
+[
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "services.service_project",
+        "description": "services.service_project",
+        "isExtraImport": true,
+        "detail": "services.service_project",
+        "documentation": {}
+    },
+    {
+        "label": "ProjectDto",
+        "importPath": "dto.ProjectDto",
+        "description": "dto.ProjectDto",
+        "isExtraImport": true,
+        "detail": "dto.ProjectDto",
+        "documentation": {}
+    },
+    {
+        "label": "ProjectDto",
+        "importPath": "dto.ProjectDto",
+        "description": "dto.ProjectDto",
+        "isExtraImport": true,
+        "detail": "dto.ProjectDto",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "constants.environment_vars",
+        "description": "constants.environment_vars",
+        "isExtraImport": true,
+        "detail": "constants.environment_vars",
+        "documentation": {}
+    },
+    {
+        "label": "EnvironmentVariable",
+        "importPath": "constants.environment_vars",
+        "description": "constants.environment_vars",
+        "isExtraImport": true,
+        "detail": "constants.environment_vars",
+        "documentation": {}
+    },
+    {
+        "label": "EnvironmentVariable",
+        "importPath": "constants.environment_vars",
+        "description": "constants.environment_vars",
+        "isExtraImport": true,
+        "detail": "constants.environment_vars",
+        "documentation": {}
+    },
+    {
+        "label": "Project",
+        "importPath": "dal.models",
+        "description": "dal.models",
+        "isExtraImport": true,
+        "detail": "dal.models",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "dal.models",
+        "description": "dal.models",
+        "isExtraImport": true,
+        "detail": "dal.models",
+        "documentation": {}
+    },
+    {
+        "label": "Model",
+        "importPath": "dal.models",
+        "description": "dal.models",
+        "isExtraImport": true,
+        "detail": "dal.models",
+        "documentation": {}
+    },
+    {
+        "label": "init_engine",
+        "importPath": "dal.main",
+        "description": "dal.main",
+        "isExtraImport": true,
+        "detail": "dal.main",
+        "documentation": {}
+    },
+    {
+        "label": "init_database",
+        "importPath": "dal.main",
+        "description": "dal.main",
+        "isExtraImport": true,
+        "detail": "dal.main",
+        "documentation": {}
+    },
+    {
+        "label": "init_engine",
+        "importPath": "dal.main",
+        "description": "dal.main",
+        "isExtraImport": true,
+        "detail": "dal.main",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "ForeignKey",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Column",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "DateTime",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "String",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Boolean",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "DatabaseManager",
+        "importPath": "dal.database_manager",
+        "description": "dal.database_manager",
+        "isExtraImport": true,
+        "detail": "dal.database_manager",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "uuid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid",
+        "description": "uuid",
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "uuid4",
+        "importPath": "uuid",
+        "description": "uuid",
+        "isExtraImport": true,
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractConcreteBase",
+        "importPath": "sqlalchemy.ext.declarative",
+        "description": "sqlalchemy.ext.declarative",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.declarative",
+        "documentation": {}
+    },
+    {
+        "label": "declarative_base",
+        "importPath": "sqlalchemy.ext.declarative",
+        "description": "sqlalchemy.ext.declarative",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.declarative",
+        "documentation": {}
+    },
+    {
+        "label": "DeclarativeBase",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "MappedAsDataclass",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Mapped",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "mapped_column",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Relationship",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "sessionmaker",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "sqlite3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlite3",
+        "description": "sqlite3",
+        "detail": "sqlite3",
+        "documentation": {}
+    },
+    {
+        "label": "validate_required_properties",
+        "importPath": "utils.validators",
+        "description": "utils.validators",
+        "isExtraImport": true,
+        "detail": "utils.validators",
+        "documentation": {}
+    },
+    {
+        "label": "get_tuple_from_type",
+        "importPath": "utils.reflection",
+        "description": "utils.reflection",
+        "isExtraImport": true,
+        "detail": "utils.reflection",
+        "documentation": {}
+    },
+    {
+        "label": "dal.dal_project",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "dal.dal_project",
+        "description": "dal.dal_project",
+        "detail": "dal.dal_project",
+        "documentation": {}
+    },
+    {
+        "label": "namedtuple",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "getmembers",
+        "importPath": "inspect",
+        "description": "inspect",
+        "isExtraImport": true,
+        "detail": "inspect",
+        "documentation": {}
+    },
+    {
+        "label": "partial",
+        "importPath": "functools",
+        "description": "functools",
+        "isExtraImport": true,
+        "detail": "functools",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "controllers.api_project",
+        "description": "controllers.api_project",
+        "isExtraImport": true,
+        "detail": "controllers.api_project",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "controllers.api_task",
+        "description": "controllers.api_task",
+        "isExtraImport": true,
+        "detail": "controllers.api_task",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "controllers.api_record",
+        "description": "controllers.api_record",
+        "isExtraImport": true,
+        "detail": "controllers.api_record",
+        "documentation": {}
+    },
+    {
+        "label": "EnvironmentVariable",
+        "kind": 6,
+        "importPath": "src.constants.environment_vars",
+        "description": "src.constants.environment_vars",
+        "peekOfCode": "class EnvironmentVariable:\n    ENVIRONMENT = \"ENVIRONMENT\"\n    DATABASE_ENGINE = \"DATABASE_ENGINE\"\n    DATABASE_URL = \"DATABASE_URL\"\n    SESSION_LOCAL = \"SESSION_LOCAL\"",
+        "detail": "src.constants.environment_vars",
+        "documentation": {}
+    },
+    {
+        "label": "api_project_add",
+        "kind": 2,
+        "importPath": "src.controllers.api_project",
+        "description": "src.controllers.api_project",
+        "peekOfCode": "def api_project_add():\n    data = request.get_json()\n    response = create_project(ProjectDto.parseJson(data))\n    return response\n@app.route(\"/api/v1.0/project/all\", methods=[\"GET\"])\ndef api_project_get_all():\n    projects = get_projects()\n    project_dicts = [\n        project._asdict() for project in projects\n    ]  # Convert to dictionaries",
+        "detail": "src.controllers.api_project",
+        "documentation": {}
+    },
+    {
+        "label": "api_project_get_all",
+        "kind": 2,
+        "importPath": "src.controllers.api_project",
+        "description": "src.controllers.api_project",
+        "peekOfCode": "def api_project_get_all():\n    projects = get_projects()\n    project_dicts = [\n        project._asdict() for project in projects\n    ]  # Convert to dictionaries\n    return jsonify(project_dicts)\n@app.route(\"/api/v1.0/project/<string:id>\", methods=[\"GET\"])\ndef api_project_get(id: int):\n    response = get_project(id)\n    return response",
+        "detail": "src.controllers.api_project",
+        "documentation": {}
+    },
+    {
+        "label": "api_project_get",
+        "kind": 2,
+        "importPath": "src.controllers.api_project",
+        "description": "src.controllers.api_project",
+        "peekOfCode": "def api_project_get(id: int):\n    response = get_project(id)\n    return response\n@app.route(\"/api/v1.0/project/<string:id>\", methods=[\"PUT\"])\ndef api_project_update(id):\n    # Logic to update a specific project by ID\n    data = request.get_json()\n    if not data:\n        return jsonify({\"error\": \"No JSON data\"}), 400\n    response = update_project(ProjectDto.parseJson(data, id))",
+        "detail": "src.controllers.api_project",
+        "documentation": {}
+    },
+    {
+        "label": "api_project_update",
+        "kind": 2,
+        "importPath": "src.controllers.api_project",
+        "description": "src.controllers.api_project",
+        "peekOfCode": "def api_project_update(id):\n    # Logic to update a specific project by ID\n    data = request.get_json()\n    if not data:\n        return jsonify({\"error\": \"No JSON data\"}), 400\n    response = update_project(ProjectDto.parseJson(data, id))\n    return response\n@app.route(\"/api/v1.0/project/<string:id>\", methods=[\"DELETE\"])\ndef api_project_delete(id):\n    response = delete_project(id)",
+        "detail": "src.controllers.api_project",
+        "documentation": {}
+    },
+    {
+        "label": "api_project_delete",
+        "kind": 2,
+        "importPath": "src.controllers.api_project",
+        "description": "src.controllers.api_project",
+        "peekOfCode": "def api_project_delete(id):\n    response = delete_project(id)\n    return response",
+        "detail": "src.controllers.api_project",
+        "documentation": {}
+    },
+    {
+        "label": "api_record_get_all",
+        "kind": 2,
+        "importPath": "src.controllers.api_record",
+        "description": "src.controllers.api_record",
+        "peekOfCode": "def api_record_get_all():\n    # Fetch data from a database or other source\n    return jsonify([])  # Convert data to JSON format\n# POST /record\n@app.route(\"/api/v1.0/record\", methods=[\"POST\"])\ndef api_record_add():\n    # Logic to add a record\n    data = request.json\n    if not data:\n        return jsonify({\"error\": \"Invalid JSON data\"}), 400",
+        "detail": "src.controllers.api_record",
+        "documentation": {}
+    },
+    {
+        "label": "api_record_add",
+        "kind": 2,
+        "importPath": "src.controllers.api_record",
+        "description": "src.controllers.api_record",
+        "peekOfCode": "def api_record_add():\n    # Logic to add a record\n    data = request.json\n    if not data:\n        return jsonify({\"error\": \"Invalid JSON data\"}), 400\n    # Process the data (e.g., access values):\n    name = data.get(\"name\")\n    # TODO: And add the new record to a db\n    # Return the data\n    return jsonify({\"message\": f\"Added record: {name}\"})",
+        "detail": "src.controllers.api_record",
+        "documentation": {}
+    },
+    {
+        "label": "api_record_get",
+        "kind": 2,
+        "importPath": "src.controllers.api_record",
+        "description": "src.controllers.api_record",
+        "peekOfCode": "def api_record_get(id: int):\n    # Logic to fetch specific record by ID\n    return jsonify({})\n# DELETE /record/:id\n@app.route(\"/api/v1.0/record/<int:id>\", methods=[\"DELETE\"])\ndef api_record_delete(id):\n    # Logic to fetch specific record by ID\n    return jsonify({\"id\": f\"{id}\", \"success\": \"true\", \"error\": \"null\"})\n# PUT /record/:id\n@app.route(\"/api/v1.0/record/<int:id>\", methods=[\"PUT\"])",
+        "detail": "src.controllers.api_record",
+        "documentation": {}
+    },
+    {
+        "label": "api_record_delete",
+        "kind": 2,
+        "importPath": "src.controllers.api_record",
+        "description": "src.controllers.api_record",
+        "peekOfCode": "def api_record_delete(id):\n    # Logic to fetch specific record by ID\n    return jsonify({\"id\": f\"{id}\", \"success\": \"true\", \"error\": \"null\"})\n# PUT /record/:id\n@app.route(\"/api/v1.0/record/<int:id>\", methods=[\"PUT\"])\ndef api_record_update(id):\n    # Logic to update a specific record by ID\n    data = request.json\n    if not data:\n        return jsonify({\"error\": \"Invalid JSON data\"}), 400",
+        "detail": "src.controllers.api_record",
+        "documentation": {}
+    },
+    {
+        "label": "api_record_update",
+        "kind": 2,
+        "importPath": "src.controllers.api_record",
+        "description": "src.controllers.api_record",
+        "peekOfCode": "def api_record_update(id):\n    # Logic to update a specific record by ID\n    data = request.json\n    if not data:\n        return jsonify({\"error\": \"Invalid JSON data\"}), 400\n    # Process the data (e.g., access values):\n    name = data.get(\"name\")\n    # TODO: And add the new record to a db\n    # Return the data\n    return jsonify({\"id\": f\"{id}\", \"success\": \"true\", \"error\": \"null\"})",
+        "detail": "src.controllers.api_record",
+        "documentation": {}
+    },
+    {
+        "label": "api_task_get_all",
+        "kind": 2,
+        "importPath": "src.controllers.api_task",
+        "description": "src.controllers.api_task",
+        "peekOfCode": "def api_task_get_all():\n    # Fetch data from a database or other source\n    return jsonify([])  # Convert data to JSON format\n# POST /task\n@app.route(\"/api/v1.0/task\", methods=[\"POST\"])\ndef api_task_add():\n    # Logic to add a task\n    data = request.json\n    if not data:\n        return jsonify({\"error\": \"Invalid JSON data\"}), 400",
+        "detail": "src.controllers.api_task",
+        "documentation": {}
+    },
+    {
+        "label": "api_task_add",
+        "kind": 2,
+        "importPath": "src.controllers.api_task",
+        "description": "src.controllers.api_task",
+        "peekOfCode": "def api_task_add():\n    # Logic to add a task\n    data = request.json\n    if not data:\n        return jsonify({\"error\": \"Invalid JSON data\"}), 400\n    # Process the data (e.g., access values):\n    name = data.get(\"name\")\n    # TODO: And add the new record to a db\n    # Return the data\n    return jsonify({\"message\": f\"Added task: {name}\"})",
+        "detail": "src.controllers.api_task",
+        "documentation": {}
+    },
+    {
+        "label": "api_task_get",
+        "kind": 2,
+        "importPath": "src.controllers.api_task",
+        "description": "src.controllers.api_task",
+        "peekOfCode": "def api_task_get(id: int):\n    # Logic to fetch specific task by ID\n    return jsonify({})\n# DELETE /task/:id\n@app.route(\"/api/v1.0/task/<int:id>\", methods=[\"DELETE\"])\ndef api_task_delete(id):\n    # Logic to fetch specific task by ID\n    return jsonify({\"id\": f\"{id}\", \"success\": \"true\", \"error\": \"null\"})\n# PUT /task/:id\n@app.route(\"/api/v1.0/task/<int:id>\", methods=[\"PUT\"])",
+        "detail": "src.controllers.api_task",
+        "documentation": {}
+    },
+    {
+        "label": "api_task_delete",
+        "kind": 2,
+        "importPath": "src.controllers.api_task",
+        "description": "src.controllers.api_task",
+        "peekOfCode": "def api_task_delete(id):\n    # Logic to fetch specific task by ID\n    return jsonify({\"id\": f\"{id}\", \"success\": \"true\", \"error\": \"null\"})\n# PUT /task/:id\n@app.route(\"/api/v1.0/task/<int:id>\", methods=[\"PUT\"])\ndef api_task_update(id):\n    # Logic to update a specific task by ID\n    data = request.json\n    if not data:\n        return jsonify({\"error\": \"Invalid JSON data\"}), 400",
+        "detail": "src.controllers.api_task",
+        "documentation": {}
+    },
+    {
+        "label": "api_task_update",
+        "kind": 2,
+        "importPath": "src.controllers.api_task",
+        "description": "src.controllers.api_task",
+        "peekOfCode": "def api_task_update(id):\n    # Logic to update a specific task by ID\n    data = request.json\n    if not data:\n        return jsonify({\"error\": \"Invalid JSON data\"}), 400\n    # Process the data (e.g., access values):\n    name = data.get(\"name\")\n    # TODO: And add the new record to a db\n    # Return the data\n    return jsonify({\"id\": f\"{id}\", \"success\": \"true\", \"error\": \"null\"})",
+        "detail": "src.controllers.api_task",
+        "documentation": {}
+    },
+    {
+        "label": "fetchAll",
+        "kind": 2,
+        "importPath": "src.dal.dal_project",
+        "description": "src.dal.dal_project",
+        "peekOfCode": "def fetchAll():\n    result = session_db.query(Project).all()\n    return result",
+        "detail": "src.dal.dal_project",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "kind": 5,
+        "importPath": "src.dal.dal_project",
+        "description": "src.dal.dal_project",
+        "peekOfCode": "session = sessionmaker(\n    autocommit=False,\n    autoflush=False,\n    bind=engine,\n)\ndef fetchAll():\n    result = session_db.query(Project).all()\n    return result",
+        "detail": "src.dal.dal_project",
+        "documentation": {}
+    },
+    {
+        "label": "DatabaseManager",
+        "kind": 6,
+        "importPath": "src.dal.database_manager",
+        "description": "src.dal.database_manager",
+        "peekOfCode": "class DatabaseManager:\n    \"\"\"Singleton class to manage database connection\"\"\"\n    _instance = None\n    _engine = None\n    def __new__(cls):\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n            # Create engine on first instance creation (i.e., at launch)\n            cls._engine = create_engine(DATABASE_URL)\n        return cls._instance",
+        "detail": "src.dal.database_manager",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_URL",
+        "kind": 5,
+        "importPath": "src.dal.database_manager",
+        "description": "src.dal.database_manager",
+        "peekOfCode": "DATABASE_URL = os.getenv(EnvironmentVariable.DATABASE_URL)\nclass DatabaseManager:\n    \"\"\"Singleton class to manage database connection\"\"\"\n    _instance = None\n    _engine = None\n    def __new__(cls):\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n            # Create engine on first instance creation (i.e., at launch)\n            cls._engine = create_engine(DATABASE_URL)",
+        "detail": "src.dal.database_manager",
+        "documentation": {}
+    },
+    {
+        "label": "init_engine",
+        "kind": 2,
+        "importPath": "src.dal.main",
+        "description": "src.dal.main",
+        "peekOfCode": "def init_engine(base_dir: str):\n    db_file_name = f\"sqlite:///{base_dir}{os.sep}..{os.sep}db{os.sep}sqlalchemy.db\"\n    engine = create_engine(db_file_name, echo=True)\n    return engine\ndef init_database(base_dir: str):\n    Model.metadata.create_all(init_engine(base_dir))",
+        "detail": "src.dal.main",
+        "documentation": {}
+    },
+    {
+        "label": "init_database",
+        "kind": 2,
+        "importPath": "src.dal.main",
+        "description": "src.dal.main",
+        "peekOfCode": "def init_database(base_dir: str):\n    Model.metadata.create_all(init_engine(base_dir))",
+        "detail": "src.dal.main",
+        "documentation": {}
+    },
+    {
+        "label": "Model",
+        "kind": 6,
+        "importPath": "src.dal.models",
+        "description": "src.dal.models",
+        "peekOfCode": "class Model(MappedAsDataclass, DeclarativeBase):\n    pass\nclass Project(Model):\n    __tablename__ = \"boosted_web_project\"\n    # BTW: init=False means don't make this column part of the constructor\n    name: Mapped[str] = mapped_column(nullable=False, unique=True, index=True)\n    color: Mapped[str] = mapped_column(\n        nullable=False, doc=\"The HTML color code (e.g. #000000)\"\n    )\n    id: Mapped[str] = mapped_column(",
+        "detail": "src.dal.models",
+        "documentation": {}
+    },
+    {
+        "label": "Project",
+        "kind": 6,
+        "importPath": "src.dal.models",
+        "description": "src.dal.models",
+        "peekOfCode": "class Project(Model):\n    __tablename__ = \"boosted_web_project\"\n    # BTW: init=False means don't make this column part of the constructor\n    name: Mapped[str] = mapped_column(nullable=False, unique=True, index=True)\n    color: Mapped[str] = mapped_column(\n        nullable=False, doc=\"The HTML color code (e.g. #000000)\"\n    )\n    id: Mapped[str] = mapped_column(\n        primary_key=True,\n        default=uuid4,",
+        "detail": "src.dal.models",
+        "documentation": {}
+    },
+    {
+        "label": "Task",
+        "kind": 6,
+        "importPath": "src.dal.models",
+        "description": "src.dal.models",
+        "peekOfCode": "class Task(Model):\n    __tablename__ = \"boosted_web_task\"\n    name: Mapped[str] = mapped_column(nullable=False)\n    project_id: Mapped[str] = mapped_column(\n        ForeignKey(\"boosted_web_project.id\", ondelete=\"CASCADE\")\n    )\n    id: Mapped[str] = mapped_column(primary_key=True, default=uuid4)\n    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow())\n    updated_at: Mapped[datetime] = mapped_column(\n        default=None, onupdate=datetime.utcnow()",
+        "detail": "src.dal.models",
+        "documentation": {}
+    },
+    {
+        "label": "TimeRecord",
+        "kind": 6,
+        "importPath": "src.dal.models",
+        "description": "src.dal.models",
+        "peekOfCode": "class TimeRecord(Model):\n    __tablename__ = \"boosted_web_time_record\"\n    startAtHourTime: Mapped[int]\n    startAtMinuteTime: Mapped[int]\n    startAtSecondTime: Mapped[int]\n    startAtDate: Mapped[datetime] = mapped_column(\n        doc=\"The date (year-month-day) the record was started\"\n    )\n    endAtHourTime: Mapped[int]\n    endAtMinuteTime: Mapped[int]",
+        "detail": "src.dal.models",
+        "documentation": {}
+    },
+    {
+        "label": "ProjectDto",
+        "kind": 6,
+        "importPath": "src.dto.ProjectDto",
+        "description": "src.dto.ProjectDto",
+        "peekOfCode": "class ProjectDto:\n    id: str | None\n    name: str\n    color: str\n    isArchived: bool\n    def __init__(self, name: str, color: str, isArchived: bool = False):\n        self.id = None  # This will be assigned during project creation\n        self.name = name\n        self.color = color\n        self.isArchived = isArchived",
+        "detail": "src.dto.ProjectDto",
+        "documentation": {}
+    },
+    {
+        "label": "get_response_json",
+        "kind": 2,
+        "importPath": "src.services.service_project",
+        "description": "src.services.service_project",
+        "peekOfCode": "def get_response_json(id: int, success: bool, message: str = \"null\"):\n    return jsonify({\"id\": f\"{id}\", \"success\": f\"{success}\", \"message\": f\"{message}\"})\ndef create_project(project_data: ProjectDto) -> None:\n    # Replace 'project_data.db' with your desired database filename\n    try:\n        conn = sqlite3.connect(f\"db{os.sep}database_sqllite3.db\")\n        cursor = conn.cursor()\n        project_data.id = str(uuid.uuid4())\n        cursor.execute(\n            \"\"\"CREATE TABLE IF NOT EXISTS projects (",
+        "detail": "src.services.service_project",
+        "documentation": {}
+    },
+    {
+        "label": "create_project",
+        "kind": 2,
+        "importPath": "src.services.service_project",
+        "description": "src.services.service_project",
+        "peekOfCode": "def create_project(project_data: ProjectDto) -> None:\n    # Replace 'project_data.db' with your desired database filename\n    try:\n        conn = sqlite3.connect(f\"db{os.sep}database_sqllite3.db\")\n        cursor = conn.cursor()\n        project_data.id = str(uuid.uuid4())\n        cursor.execute(\n            \"\"\"CREATE TABLE IF NOT EXISTS projects (\n                      id TEXT PRIMARY KEY,\n                      name TEXT NOT NULL,",
+        "detail": "src.services.service_project",
+        "documentation": {}
+    },
+    {
+        "label": "get_project",
+        "kind": 2,
+        "importPath": "src.services.service_project",
+        "description": "src.services.service_project",
+        "peekOfCode": "def get_project(project_id: str) -> ProjectDto:\n    try:\n        conn = sqlite3.connect(f\"db{os.sep}database_sqllite3.db\")\n        cursor = conn.cursor()\n        cursor.execute(\n            \"\"\"SELECT id, name, color, isArchived FROM projects WHERE id = ?\"\"\",\n            (project_id,),\n        )\n        project_data = cursor.fetchone()\n        ProjectRecord = get_tuple_from_type(",
+        "detail": "src.services.service_project",
+        "documentation": {}
+    },
+    {
+        "label": "get_projects",
+        "kind": 2,
+        "importPath": "src.services.service_project",
+        "description": "src.services.service_project",
+        "peekOfCode": "def get_projects() -> list[ProjectDto]:\n    try:\n        projects = dal_project.fetchAll()\n        ProjectRecord = get_tuple_from_type(\n            ProjectDto\n        )  # Get namedtuple type dynamically\n        projects = []\n        for record in projects:\n            projects.append(\n                ProjectRecord(*record)",
+        "detail": "src.services.service_project",
+        "documentation": {}
+    },
+    {
+        "label": "update_project",
+        "kind": 2,
+        "importPath": "src.services.service_project",
+        "description": "src.services.service_project",
+        "peekOfCode": "def update_project(project_data: ProjectDto) -> None:\n    try:\n        conn = sqlite3.connect(f\"db{os.sep}database_sqllite3.db\")\n        cursor = conn.cursor()\n        # Get attribute names with non-None values\n        attrs_to_update = [\n            attr\n            for attr in vars(project_data).keys()\n            if vars(project_data)[attr] is not None\n        ]",
+        "detail": "src.services.service_project",
+        "documentation": {}
+    },
+    {
+        "label": "delete_project",
+        "kind": 2,
+        "importPath": "src.services.service_project",
+        "description": "src.services.service_project",
+        "peekOfCode": "def delete_project(id: str) -> bool:\n    try:\n        conn = sqlite3.connect(f\"db{os.sep}database_sqllite3.db\")\n        cursor = conn.cursor()\n        query = f\"DELETE FROM projects WHERE id = ?\"\n        cursor.execute(query, (id,))\n        conn.commit()\n        # Check if any rows were affected (i.e., if a project was deleted)\n        rows_affected = cursor.rowcount\n        message = \"null\" if rows_affected > 0 else \"No record affected\"",
+        "detail": "src.services.service_project",
+        "documentation": {}
+    },
+    {
+        "label": "toJSON",
+        "kind": 2,
+        "importPath": "src.utils.json_utils",
+        "description": "src.utils.json_utils",
+        "peekOfCode": "def toJSON(obj):\n    return json.dumps(obj, default=lambda o: o.__dict__, sort_keys=True, indent=4)",
+        "detail": "src.utils.json_utils",
+        "documentation": {}
+    },
+    {
+        "label": "get_tuple_from_type",
+        "kind": 2,
+        "importPath": "src.utils.reflection",
+        "description": "src.utils.reflection",
+        "peekOfCode": "def get_tuple_from_type(cls):\n    \"\"\"\n    Creates a namedtuple type based on the public attributes of a class.\n    Args:\n        cls (class): The class to use for generating the namedtuple type.\n    Returns:\n        namedtuple: A namedtuple type with fields matching the class's public attributes.\n    \"\"\"\n    boring = dir(type(\"dummy\", (object,), {}))\n    cls_extract = [item for item in getmembers(cls) if item[0] not in boring]",
+        "detail": "src.utils.reflection",
+        "documentation": {}
+    },
+    {
+        "label": "validate_required_properties",
+        "kind": 2,
+        "importPath": "src.utils.validators",
+        "description": "src.utils.validators",
+        "peekOfCode": "def validate_required_properties(obj, required_properties):\n    \"\"\"\n    This function checks if all required properties exist and are not empty (after trim for strings).\n    Args:\n        obj: The object to be validated.\n        required_properties: A list of strings representing the required property names.\n    Returns:\n        None if all properties are valid, otherwise returns a dictionary containing an \"error\" key with a message.\n    \"\"\"\n    missing_or_empty = []",
+        "detail": "src.utils.validators",
+        "documentation": {}
+    },
+    {
+        "label": "env",
+        "kind": 5,
+        "importPath": "src.app",
+        "description": "src.app",
+        "peekOfCode": "env = os.getenv(EnvironmentVariable.ENVIRONMENT)\n# Create the Flask application instance\napp = Flask(__name__)\nBASE_DIR = os.path.dirname(os.path.abspath(__file__))\nif env == \"dev\":\n    print(\"Environment is dev\")\n    # Create the database engine (dependency injection)\n    app.config[EnvironmentVariable.DATABASE_ENGINE] = init_engine(BASE_DIR)\n    # Create a session maker using the injected engine\n    SessionLocal = sessionmaker(",
+        "detail": "src.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "src.app",
+        "description": "src.app",
+        "peekOfCode": "app = Flask(__name__)\nBASE_DIR = os.path.dirname(os.path.abspath(__file__))\nif env == \"dev\":\n    print(\"Environment is dev\")\n    # Create the database engine (dependency injection)\n    app.config[EnvironmentVariable.DATABASE_ENGINE] = init_engine(BASE_DIR)\n    # Create a session maker using the injected engine\n    SessionLocal = sessionmaker(\n        autocommit=False,\n        autoflush=False,",
+        "detail": "src.app",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "src.app",
+        "description": "src.app",
+        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.abspath(__file__))\nif env == \"dev\":\n    print(\"Environment is dev\")\n    # Create the database engine (dependency injection)\n    app.config[EnvironmentVariable.DATABASE_ENGINE] = init_engine(BASE_DIR)\n    # Create a session maker using the injected engine\n    SessionLocal = sessionmaker(\n        autocommit=False,\n        autoflush=False,\n        bind=app.config[EnvironmentVariable.DATABASE_ENGINE],",
+        "detail": "src.app",
+        "documentation": {}
+    }
+]
