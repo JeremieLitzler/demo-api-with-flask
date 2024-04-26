@@ -4,7 +4,9 @@ import sqlite3
 import os
 import uuid
 import json
+from sqlalchemy.orm import scoped_session
 
+from app import app
 from dto.ProjectDto import ProjectDto
 from utils.validators import validate_required_properties
 from utils.reflection import get_tuple_from_type
@@ -12,6 +14,9 @@ from utils.db_utils import row2dict
 from utils.json_utils import new_alchemy_encoder_recursive_selective
 import dal.dal_project as dal_project
 from dal.models import Project
+from constants.environment_vars import EnvironmentVariable
+
+_session_db: scoped_session = app.config[EnvironmentVariable.SESSION_LOCAL]
 
 
 def get_response_json(id: int, success: bool, message: str = "null"):
@@ -39,6 +44,8 @@ def get_project(project_id: str) -> ProjectDto:
             return jsonify({"message": "Project not found"}), 404
         else:
             return jsonify(project)
+    except Exception as ex:
+        print(ex)
     finally:
         print("finished calling get_project")
 
@@ -47,46 +54,29 @@ def get_projects() -> list[ProjectDto]:
     try:
         projects = dal_project.fetchAll()
         return jsonify(projects)
+    except Exception as ex:
+        print(ex)
     finally:
         print("finished calling get_projects")
 
 
 def update_project(project_data: ProjectDto) -> None:
     try:
-        conn = sqlite3.connect(f"db{os.sep}database_sqllite3.db")
-        cursor = conn.cursor()
-        # Get attribute names with non-None values
-        attrs_to_update = [
-            attr
-            for attr in vars(project_data).keys()
-            if vars(project_data)[attr] is not None
-        ]
-
-        # Build the SET clause dynamically based on non-None attributes
-        set_clause = ", ".join([f"{attr} = ?" for attr in attrs_to_update])
-
-        # Prepare the update query with placeholders for non-None values
-        update_query = f"UPDATE projects SET {set_clause} WHERE id = ?"
-
-        # Extract values from the project_data object based on the selected attributes
-        values = [getattr(project_data, attr) for attr in attrs_to_update]
-        values.append(project_data.id)  # Add ID for WHERE clause
-
-        # Execute the update query with filtered values
-        cursor.execute(update_query, values)
-
-        conn.commit()
-
-        # Retrieve the updated data using get_project (assuming it exists)
-        project = get_project(project_data.id)
-
-        if project:
-            return project
-        else:
+        project = dal_project.fetchOne(project_data.id)
+        if project == None:
             return jsonify({"message": "Project not found"}), 404
 
+        if project_data.name is not None:
+            project.name = project_data.name
+        if project_data.color is not None:
+            project.color = project_data.color
+        dal_project.save()
+
+        return jsonify(project)
+    except Exception as ex:
+        print(ex)
     finally:
-        conn.close()
+        print("finished calling update_project")
 
 
 def delete_project(id: str) -> bool:

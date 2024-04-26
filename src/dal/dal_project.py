@@ -12,7 +12,7 @@ session_db: scoped_session = app.config[EnvironmentVariable.SESSION_LOCAL]
 
 def add(project: Project):
     session_db.add(project)
-    session_db.commit()
+    save()
     print(f"Inserted {project.name} to the DB")
 
 
@@ -27,3 +27,7 @@ def fetchOne(id: str):
         return result.first()
     else:
         return None
+
+
+def save():
+    session_db.commit()

@@ -1,3 +1,4 @@
+# Thanks to https://stackoverflow.com/a/57732785/3910066
 from dataclasses import dataclass
 from datetime import datetime
 from uuid import uuid4
@@ -18,6 +19,7 @@ class Model(MappedAsDataclass, DeclarativeBase):
     pass
 
 
+# Required to be able to serialize the model to JSON
 @dataclass
 class Project(Model):
     __tablename__ = "boosted_web_project"
