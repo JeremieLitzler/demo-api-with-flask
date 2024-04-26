@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from uuid import uuid4
 from typing import Optional
+from sqlalchemy import func
 from sqlalchemy import ForeignKey, Column, DateTime, String, Boolean
 from sqlalchemy.ext.declarative import AbstractConcreteBase
 from sqlalchemy.orm import (
@@ -33,11 +34,12 @@ class Project(Model):
     color: Mapped[str] = mapped_column(
         nullable=False, doc="The HTML color code (e.g. #000000)"
     )
-    updated_at: Mapped[datetime] = mapped_column(
-        nullable=True, onupdate=datetime.utcnow()
-    )
+    # Use func.now from sqlalchemy and server_default otherwise the timestamp
+    # will be off
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+    # Same for onupdate, use func.now
+    updated_at: Mapped[datetime] = mapped_column(nullable=True, onupdate=func.now())
     is_archived: Mapped[bool] = mapped_column(default=False)
-    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow())
 
     task = Relationship("Task", back_populates="project", passive_deletes=True)
     time_record = Relationship(

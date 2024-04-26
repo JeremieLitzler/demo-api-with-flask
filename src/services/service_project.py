@@ -70,6 +70,8 @@ def update_project(project_data: ProjectDto) -> None:
             project.name = project_data.name
         if project_data.color is not None:
             project.color = project_data.color
+
+        # TODO: Feat > format date to YYYY-MM-DD hh:mm:ss
         dal_project.save()
 
         return jsonify(project)
