@@ -1,4 +1,4 @@
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import scoped_session
 
 from app import app
 from constants.environment_vars import *
@@ -7,7 +7,7 @@ from dal.models import Project
 # from app import app
 
 # engine = app.config[EnvironmentVariable.DATABASE_ENGINE]
-session_db = app.config[EnvironmentVariable.SESSION_LOCAL]
+session_db: scoped_session = app.config[EnvironmentVariable.SESSION_LOCAL]
 
 
 def add(project: Project):
@@ -19,3 +19,11 @@ def add(project: Project):
 def fetchAll():
     result = session_db.query(Project).all()
     return result
+
+
+def fetchOne(id: str):
+    result = session_db.query(Project).filter_by(id=id)
+    if result.count() == 1:
+        return result.first()
+    else:
+        return None

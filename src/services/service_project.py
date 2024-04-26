@@ -34,25 +34,13 @@ def create_project(project_data: ProjectDto) -> None:
 
 def get_project(project_id: str) -> ProjectDto:
     try:
-        conn = sqlite3.connect(f"db{os.sep}database_sqllite3.db")
-        cursor = conn.cursor()
-        cursor.execute(
-            """SELECT id, name, color, isArchived FROM projects WHERE id = ?""",
-            (project_id,),
-        )
-        project_data = cursor.fetchone()
-        ProjectRecord = get_tuple_from_type(
-            ProjectDto
-        )  # Get namedtuple type dynamically
-
-        if project_data:
-            project = ProjectRecord(*project_data)
-            return jsonify(project._asdict())
-        else:
+        project = dal_project.fetchOne(project_id)
+        if project == None:
             return jsonify({"message": "Project not found"}), 404
-
+        else:
+            return jsonify(project)
     finally:
-        conn.close()
+        print("finished calling get_project")
 
 
 def get_projects() -> list[ProjectDto]:
