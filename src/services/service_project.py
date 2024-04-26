@@ -7,6 +7,7 @@ import uuid
 from dto.ProjectDto import ProjectDto
 from utils.validators import validate_required_properties
 from utils.reflection import get_tuple_from_type
+from utils.db_utils import row2dict
 import dal.dal_project as dal_project
 from dal.models import Project
 
@@ -56,16 +57,12 @@ def get_projects() -> list[ProjectDto]:
     try:
         projects = dal_project.fetchAll()
 
-        ProjectRecord = get_tuple_from_type(
-            ProjectDto
-        )  # Get namedtuple type dynamically
+        projectsDto = []
+        for project in projects:
+            # Convert project record to dictionary
+            projectsDto.append(row2dict(project))
 
-        projects = []
-        for record in projects:
-            projects.append(
-                ProjectRecord(*record)
-            )  # Unpack data using * operator for each row
-        return projects
+        return jsonify(projectsDto)
     finally:
         print("finished calling get_projects")
 
