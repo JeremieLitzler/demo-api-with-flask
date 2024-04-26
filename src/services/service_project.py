@@ -3,11 +3,13 @@ from pathlib import Path
 import sqlite3
 import os
 import uuid
+import json
 
 from dto.ProjectDto import ProjectDto
 from utils.validators import validate_required_properties
 from utils.reflection import get_tuple_from_type
 from utils.db_utils import row2dict
+from utils.json_utils import new_alchemy_encoder_recursive_selective
 import dal.dal_project as dal_project
 from dal.models import Project
 
@@ -56,13 +58,7 @@ def get_project(project_id: str) -> ProjectDto:
 def get_projects() -> list[ProjectDto]:
     try:
         projects = dal_project.fetchAll()
-
-        projectsDto = []
-        for project in projects:
-            # Convert project record to dictionary
-            projectsDto.append(row2dict(project))
-
-        return jsonify(projectsDto)
+        return jsonify(projects)
     finally:
         print("finished calling get_projects")
 

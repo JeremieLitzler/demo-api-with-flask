@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from datetime import datetime
 from uuid import uuid4
 from typing import Optional
@@ -17,6 +18,7 @@ class Model(MappedAsDataclass, DeclarativeBase):
     pass
 
 
+@dataclass
 class Project(Model):
     __tablename__ = "boosted_web_project"
 
