@@ -9,6 +9,9 @@ from dto.ProjectDto import ProjectDto
 @app.route("/api/v1.0/project", methods=["POST"])
 def api_project_add():
     data = request.get_json()
+    if not data:
+        return get_response_json(id, False, "No JSON data", 400)
+
     response = create_project(ProjectDto.parseJson(data))
     return response
 
@@ -30,7 +33,7 @@ def api_project_update(id):
     # Logic to update a specific project by ID
     data = request.get_json()
     if not data:
-        return jsonify({"error": "No JSON data"}), 400
+        return get_response_json(id, False, "No JSON data", 400)
 
     response = update_project(ProjectDto.parseJson(data, id))
     return response

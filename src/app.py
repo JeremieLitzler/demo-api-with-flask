@@ -18,26 +18,32 @@ env = os.getenv(EnvironmentVariable.ENVIRONMENT)
 app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Create the database engine (dependency injection)
+app.config[EnvironmentVariable.DATABASE_ENGINE] = init_engine(BASE_DIR)
+# Create a session maker using the injected engine
+SessionLocal = scoped_session(
+    sessionmaker(
+        autocommit=False,
+        autoflush=False,
+        bind=app.config[EnvironmentVariable.DATABASE_ENGINE],
+    )
+)
+app.config[EnvironmentVariable.SESSION_LOCAL] = SessionLocal
+
 if env == "dev":
     print("Environment is dev")
-    # Create the database engine (dependency injection)
-    app.config[EnvironmentVariable.DATABASE_ENGINE] = init_engine(BASE_DIR)
-
-    # Create a session maker using the injected engine
-    SessionLocal = scoped_session(
-        sessionmaker(
-            autocommit=False,
-            autoflush=False,
-            bind=app.config[EnvironmentVariable.DATABASE_ENGINE],
-        )
-    )
-
-    app.config[EnvironmentVariable.SESSION_LOCAL] = SessionLocal
-
     # TODO: drop the database
+    print("drop database...")
     reset_database(BASE_DIR)
+    print("dropped database!")
     # TODO: and recreate it
+    print("create database...")
     init_database(BASE_DIR)
+    print("created database!")
 
-    if env == "production":
-        print("Environment is production")
+if env == "production":
+    print("Environment is production")
+    # TODO: create
+    print("create database...")
+    init_database(BASE_DIR)
+    print("created database!")

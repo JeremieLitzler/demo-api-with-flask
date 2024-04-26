@@ -1,5 +1,4 @@
 from sqlalchemy import create_engine
-from dal.database_manager import DatabaseManager
 from dal.models import *
 import os
 from dal.models import Model
