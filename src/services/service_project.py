@@ -34,7 +34,10 @@ def create_project(project_data: ProjectDto) -> None:
         message = "null" if True else "No record affected"
         return get_response_json(newProject.id, True, message)
     except Exception as ex:
-        return get_response_json("", False, ex.with_traceback)
+        print(ex)
+        return get_response_json(id, False, ex)
+    finally:
+        print("finished calling create_project")
 
 
 def get_project(project_id: str) -> ProjectDto:
@@ -46,6 +49,7 @@ def get_project(project_id: str) -> ProjectDto:
             return jsonify(project)
     except Exception as ex:
         print(ex)
+        return get_response_json(id, False, ex)
     finally:
         print("finished calling get_project")
 
@@ -56,6 +60,7 @@ def get_projects() -> list[ProjectDto]:
         return jsonify(projects)
     except Exception as ex:
         print(ex)
+        return get_response_json(id, False, ex)
     finally:
         print("finished calling get_projects")
 
@@ -71,29 +76,23 @@ def update_project(project_data: ProjectDto) -> None:
         if project_data.color is not None:
             project.color = project_data.color
 
-        # TODO: Feat > format date to YYYY-MM-DD hh:mm:ss
         dal_project.save()
 
         return jsonify(project)
     except Exception as ex:
         print(ex)
+        return get_response_json(id, False, ex)
     finally:
         print("finished calling update_project")
 
 
 def delete_project(id: str) -> bool:
     try:
-        conn = sqlite3.connect(f"db{os.sep}database_sqllite3.db")
-        cursor = conn.cursor()
-
-        query = f"DELETE FROM projects WHERE id = ?"
-        cursor.execute(query, (id,))
-        conn.commit()
-
-        # Check if any rows were affected (i.e., if a project was deleted)
-        rows_affected = cursor.rowcount
-        message = "null" if rows_affected > 0 else "No record affected"
-        return get_response_json(id, rows_affected > 0, message)
-
+        result = dal_project.delete(id)
+        message = "" if result else "No record affected"
+        return get_response_json(id, True, message)
+    except Exception as ex:
+        print(ex)
+        return get_response_json(id, False, ex)
     finally:
-        conn.close()
+        print("finished calling delete_project")

@@ -35,3 +35,13 @@ def fetchOne(id: str):
         return result.first()
     else:
         return None
+
+
+def delete(id: str):
+    project = fetchOne(id)
+    if project is None:
+        return False
+
+    session_db.delete(project)
+    session_db.commit()
+    return True

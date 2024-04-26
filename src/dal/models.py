@@ -36,9 +36,13 @@ class Project(Model):
     )
     # Use func.now from sqlalchemy and server_default otherwise the timestamp
     # will be off
-    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+    # TODO: Feat > format date to YYYY-MM-DD hh:mm:ss
+    created_at: Mapped[datetime] = mapped_column(init=False, server_default=func.now())
     # Same for onupdate, use func.now
-    updated_at: Mapped[datetime] = mapped_column(nullable=True, onupdate=func.now())
+    # TODO: Feat > format date to YYYY-MM-DD hh:mm:ss
+    updated_at: Mapped[datetime] = mapped_column(
+        init=False, nullable=True, onupdate=func.now()
+    )
     is_archived: Mapped[bool] = mapped_column(default=False)
 
     task = Relationship("Task", back_populates="project", passive_deletes=True)
