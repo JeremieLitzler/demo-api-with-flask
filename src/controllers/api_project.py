@@ -10,21 +10,21 @@ from dto.ProjectDto import ProjectDto
 def api_project_add():
     data = request.get_json()
     if not data:
-        return get_response_json(id, False, "No JSON data", 400)
+        return get_response_json(None, False, "No JSON data", 400)
 
-    response = create_project(ProjectDto.parseJson(data))
+    response = add(ProjectDto.parseJson(data))
     return response
 
 
 @app.route("/api/v1.0/project/all", methods=["GET"])
 def api_project_get_all():
-    projects = get_projects()
+    projects = getAll()
     return projects
 
 
 @app.route("/api/v1.0/project/<string:id>", methods=["GET"])
 def api_project_get(id: int):
-    response = get_project(id)
+    response = getOne(id)
     return response
 
 
@@ -35,11 +35,11 @@ def api_project_update(id):
     if not data:
         return get_response_json(id, False, "No JSON data", 400)
 
-    response = update_project(ProjectDto.parseJson(data, id))
+    response = update(ProjectDto.parseJson(data, id))
     return response
 
 
 @app.route("/api/v1.0/project/<string:id>", methods=["DELETE"])
 def api_project_delete(id):
-    response = delete_project(id)
+    response = delete(id)
     return response

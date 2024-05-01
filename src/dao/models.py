@@ -1,17 +1,18 @@
-# Thanks to https://stackoverflow.com/a/57732785/3910066
+from sqlalchemy.orm import (
+    DeclarativeBase,
+    MappedAsDataclass,
+)
+
 from dataclasses import dataclass
 from datetime import datetime
 from uuid import uuid4
 from typing import Optional
 from sqlalchemy import func
-from sqlalchemy import ForeignKey, Column, DateTime, String, Boolean
-from sqlalchemy.ext.declarative import AbstractConcreteBase
+from sqlalchemy import ForeignKey, DateTime, String, Boolean
 from sqlalchemy.orm import (
-    DeclarativeBase,
-    MappedAsDataclass,
+    Relationship,
     Mapped,
     mapped_column,
-    Relationship,
 )
 
 
@@ -20,7 +21,8 @@ class Model(MappedAsDataclass, DeclarativeBase):
     pass
 
 
-# Required to be able to serialize the model to JSON
+# @dataclass is a required decorator to be able to serialize the model to JSON
+# Thanks to https://stackoverflow.com/a/57732785/3910066
 @dataclass
 class Project(Model):
     __tablename__ = "boosted_web_project"
@@ -60,17 +62,24 @@ class Project(Model):
         return f"{self.__class_.__name__}, name: {self.name}"
 
 
+@dataclass
 class Task(Model):
     __tablename__ = "boosted_web_task"
     id: Mapped[str] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(nullable=False)
+    completed: Mapped[bool] = mapped_column(nullable=True)
     project_id: Mapped[str] = mapped_column(
         ForeignKey("boosted_web_project.id", ondelete="CASCADE")
     )
+    # Use func.now from sqlalchemy and server_default otherwise the timestamp
+    # will be off
+    # TODO: Feat > format date to YYYY-MM-DD hh:mm:ss
+    created_at: Mapped[datetime] = mapped_column(init=False, server_default=func.now())
+    # Same for onupdate, use func.now
+    # TODO: Feat > format date to YYYY-MM-DD hh:mm:ss
     updated_at: Mapped[datetime] = mapped_column(
-        nullable=True, onupdate=datetime.utcnow()
+        init=False, nullable=True, onupdate=func.now()
     )
-    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow())
 
     project = Relationship("Project", back_populates="task")
     time_record = Relationship(
@@ -87,6 +96,8 @@ class Task(Model):
         return f"{self.__class_.__name__}, name: {self.name}"
 
 
+# Required to be able to serialize the model to JSON
+@dataclass
 class TimeRecord(Model):
     __tablename__ = "boosted_web_time_record"
     id: Mapped[str] = mapped_column(primary_key=True)
@@ -109,10 +120,13 @@ class TimeRecord(Model):
     task_id: Mapped[str] = mapped_column(
         ForeignKey("boosted_web_task.id", ondelete="CASCADE"), nullable=True
     )
+    # TODO: Feat > format date to YYYY-MM-DD hh:mm:ss
+    created_at: Mapped[datetime] = mapped_column(init=False, server_default=func.now())
+    # Same for onupdate, use func.now
+    # TODO: Feat > format date to YYYY-MM-DD hh:mm:ss
     updated_at: Mapped[datetime] = mapped_column(
-        nullable=True, onupdate=datetime.utcnow()
+        init=False, nullable=True, onupdate=func.now()
     )
-    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow())
 
     task = Relationship("Task", back_populates="time_record")
     project = Relationship("Project", back_populates="time_record")

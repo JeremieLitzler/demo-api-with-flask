@@ -7,37 +7,13 @@ import json
 from sqlalchemy.orm import scoped_session
 
 from app import app
+from utils.api_utils import get_response_json
 from dto.ProjectDto import ProjectDto
-from utils.validators import validate_required_properties
-from utils.reflection import get_tuple_from_type
-from utils.db_utils import row2dict
-from utils.json_utils import new_alchemy_encoder_recursive_selective
+from dao.models import Project
 import dal.dal_project as dal_project
-from dal.models import Project
-from constants.environment_vars import EnvironmentVariable
-
-_session_db: scoped_session = app.config[EnvironmentVariable.SESSION_LOCAL]
 
 
-def get_response_json(id: int, success: bool, message: str = "null", httpCode=200):
-    """Standardizw the response when not returning actual records
-
-    Args:
-        id (int): the record id
-        success (bool): the result of the operation
-        message (str, optional): the message to explicit the operation result. Defaults to "null".
-        httpCode (int, optional): the http code to use. Defaults to 200.
-
-    Returns:
-        str: The JSON object
-    """
-    return (
-        jsonify({"id": f"{id}", "success": f"{success}", "message": f"{message}"}),
-        httpCode,
-    )
-
-
-def create_project(project_data: ProjectDto) -> None:
+def add(project_data: ProjectDto) -> None:
 
     try:
         # TODO: Feat > automap the Dto to Model
@@ -54,9 +30,12 @@ def create_project(project_data: ProjectDto) -> None:
         print("finished calling create_project")
 
 
-def get_project(id: str) -> ProjectDto:
+def getOne(id: str, noJson=False) -> ProjectDto:
     try:
         project = dal_project.fetchOne(id)
+        if noJson:
+            return project
+
         if project == None:
             return get_response_json(id, False, "Project not found", 404)
         else:
@@ -68,7 +47,7 @@ def get_project(id: str) -> ProjectDto:
         print("finished calling get_project")
 
 
-def get_projects() -> list[ProjectDto]:
+def getAll() -> list[ProjectDto]:
     try:
         projects = dal_project.fetchAll()
         return jsonify(projects)
@@ -79,7 +58,7 @@ def get_projects() -> list[ProjectDto]:
         print("finished calling get_projects")
 
 
-def update_project(project_data: ProjectDto) -> None:
+def update(project_data: ProjectDto) -> None:
     try:
         project = dal_project.fetchOne(project_data.id)
         if project == None:
@@ -100,7 +79,7 @@ def update_project(project_data: ProjectDto) -> None:
         print("finished calling update_project")
 
 
-def delete_project(id: str) -> bool:
+def delete(id: str) -> bool:
     try:
         result = dal_project.delete(id)
         message = "Project deleted successfully" if result else "No record affected"

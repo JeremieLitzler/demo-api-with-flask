@@ -1,11 +1,10 @@
 # TODO > Feat: DRY the code a bit since all dal files are the same
 #              Idea: how do you use generics in Python?
-
 from sqlalchemy.orm import scoped_session
 
 from app import app
 from constants.environment_vars import EnvironmentVariable
-from dao.models import Project
+from dao.models import Task
 
 # from app import app
 
@@ -18,22 +17,22 @@ def save():
     session_db.commit()
 
 
-# Add a project
-def add(project: Project):
-    session_db.add(project)
+# Add a task
+def add(task: Task):
+    session_db.add(task)
     save()
-    print(f"Inserted {project.name} to the DB")
+    print(f"Inserted {task.name} to the DB")
 
 
-# Get all the projects
+# Get all the tasks
 def fetchAll():
-    result = session_db.query(Project).all()
+    result = session_db.query(Task).all()
     return result
 
 
-# Get a project by id
+# Get a task by id
 def fetchOne(id: str):
-    result = session_db.query(Project).filter_by(id=id)
+    result = session_db.query(Task).filter_by(id=id)
     if result.count() == 1:
         return result.first()
     else:
@@ -41,10 +40,10 @@ def fetchOne(id: str):
 
 
 def delete(id: str):
-    project = fetchOne(id)
-    if project is None:
+    task = fetchOne(id)
+    if task is None:
         return False
 
-    session_db.delete(project)
+    session_db.delete(task)
     session_db.commit()
     return True

@@ -1,6 +1,23 @@
 ###
-GET http://127.0.0.1:5000/api/v1.0/task/all HTTP/1.1
-content-type: application/json
+POST http://127.0.0.1:5000/api/v1.0/task HTTP/1.1
+Content-Type: application/json
+
+{
+}
+###
+POST http://127.0.0.1:5000/api/v1.0/task HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": null
+}
+###
+POST http://127.0.0.1:5000/api/v1.0/task HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": " "
+}
 
 ###
 POST http://127.0.0.1:5000/api/v1.0/task HTTP/1.1
@@ -11,17 +28,56 @@ Content-Type: application/json
 }
 
 ###
-GET http://127.0.0.1:5000/api/v1.0/task/1 HTTP/1.1
+POST http://127.0.0.1:5000/api/v1.0/task HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "New api/v1.0/task",
+  "project_id": " "
+}
+
+###
+POST http://127.0.0.1:5000/api/v1.0/task HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "New api/v1.0/task",
+  "project_id": "doesntexist"
+}
+###
+POST http://127.0.0.1:5000/api/v1.0/task HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "New api/v1.0/task",
+  "project_id": "c60637d20bde4f95b6e8d40e55a41298"
+}
+
+###
+GET http://127.0.0.1:5000/api/v1.0/task/63b78fefb173427b9872ab577cbfa7c1 HTTP/1.1
+content-type: application/json
+
+
+###
+GET http://127.0.0.1:5000/api/v1.0/task/all HTTP/1.1
 content-type: application/json
 
 ###
-DELETE http://127.0.0.1:5000/api/v1.0/task/1 HTTP/1.1
-content-type: application/json
-
-###
-PUT http://127.0.0.1:5000/api/v1.0/task/1 HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/task/63b78fefb173427b9872ab577cbfa7c1 HTTP/1.1
 content-type: application/json
 
 {
-  "name": "New api/v1.0/task"
+  "name": "Task edited"
 }
+
+###
+PUT http://127.0.0.1:5000/api/v1.0/task/63b78fefb173427b9872ab577cbfa7c1 HTTP/1.1
+content-type: application/json
+
+{
+  "completed": true
+}
+
+###
+DELETE http://127.0.0.1:5000/api/v1.0/task/63b78fefb173427b9872ab577cbfa7c1 HTTP/1.1
+content-type: application/json
