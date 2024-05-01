@@ -18,13 +18,13 @@ def api_project_add():
 
 @app.route("/api/v1.0/project/all", methods=["GET"])
 def api_project_get_all():
-    projects = getAll()
+    projects = get_all()
     return projects
 
 
 @app.route("/api/v1.0/project/<string:id>", methods=["GET"])
 def api_project_get(id: int):
-    response = getOne(id)
+    response = get_one(id)
     return response
 
 

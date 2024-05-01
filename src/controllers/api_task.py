@@ -18,13 +18,13 @@ def api_task_add():
 
 @app.route("/api/v1.0/task/all", methods=["GET"])
 def api_task_get_all():
-    tasks = getAll()
+    tasks = get_all()
     return tasks
 
 
 @app.route("/api/v1.0/task/<string:id>", methods=["GET"])
 def api_task_get(id: int):
-    response = getOne(id)
+    response = get_one(id)
     return response
 
 

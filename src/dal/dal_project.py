@@ -26,13 +26,13 @@ def add(project: Project):
 
 
 # Get all the projects
-def fetchAll():
+def fetch_all():
     result = session_db.query(Project).all()
     return result
 
 
 # Get a project by id
-def fetchOne(id: str):
+def fetch_one(id: str):
     result = session_db.query(Project).filter_by(id=id)
     if result.count() == 1:
         return result.first()
@@ -41,7 +41,7 @@ def fetchOne(id: str):
 
 
 def delete(id: str):
-    project = fetchOne(id)
+    project = fetch_one(id)
     if project is None:
         return False
 

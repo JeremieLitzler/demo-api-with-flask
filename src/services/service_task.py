@@ -28,14 +28,18 @@ def validate(data: TaskDto, checkProject=True):
     if data.project_id.strip() == "":
         return get_response_json(None, False, "Project is empty", 400)
 
-    project = service_project.getOne(data.project_id, True)
+    project = service_project.get_one(data.project_id, True)
     if project == None:
         return get_response_json(None, False, "Project doesn't exist", 400)
+
+    return None
 
 
 def create(data: TaskDto) -> None:
 
-    validate(data)
+    result = validate(data)
+    if result != None:
+        return result
 
     try:
         # TODO: Feat > automap the Dto to Model
@@ -55,12 +59,12 @@ def create(data: TaskDto) -> None:
         print("finished calling service_task.create")
 
 
-def getOne(id: str, noJson=False) -> TaskDto:
+def get_one(id: str, noJson=False) -> TaskDto:
     if id.strip() == "":
         return get_response_json(id, False, "ID is required", 400)
 
     try:
-        task = dal_task.fetchOne(id)
+        task = dal_task.fetch_one(id)
         if task == None:
             return get_response_json(id, False, "Task not found", 404)
         else:
@@ -69,32 +73,31 @@ def getOne(id: str, noJson=False) -> TaskDto:
         print(ex)
         return get_response_json(id, False, ex, 500)
     finally:
-        print("finished calling service_task.getOne")
+        print("finished calling service_task.get_one")
 
 
-def getAll() -> list[TaskDto]:
+def get_all() -> list[TaskDto]:
     try:
-        tasks = dal_task.fetchAll()
+        tasks = dal_task.fetch_all()
         return jsonify(tasks)
     except Exception as ex:
         print(ex)
         return get_response_json(id, False, ex)
     finally:
-        print("finished calling service_task.getAll")
+        print("finished calling service_task.get_all")
 
 
 # TODO > Feat: how do you notify the client that the project_id cannot be
 #              changed? http 400 if Dto contains the attribute?
 def update(data: TaskDto) -> None:
-    validate(data, False)
     try:
-        task = dal_task.fetchOne(data.id)
+        task = dal_task.fetch_one(data.id)
         if task == None:
             return get_response_json(id, False, "Task not found", 404)
 
         # TODO > Feat : check name not already taken
 
-        if data.name is not None:
+        if data.name is not None and data.name.strip() != "":
             task.name = data.name
         if data.completed is not None:
             task.completed = data.completed

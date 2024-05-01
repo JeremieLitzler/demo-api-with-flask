@@ -25,13 +25,13 @@ def add(task: Task):
 
 
 # Get all the tasks
-def fetchAll():
+def fetch_all():
     result = session_db.query(Task).all()
     return result
 
 
 # Get a task by id
-def fetchOne(id: str):
+def fetch_one(id: str):
     result = session_db.query(Task).filter_by(id=id)
     if result.count() == 1:
         return result.first()
@@ -40,7 +40,7 @@ def fetchOne(id: str):
 
 
 def delete(id: str):
-    task = fetchOne(id)
+    task = fetch_one(id)
     if task is None:
         return False
 

@@ -645,11 +645,11 @@
         "documentation": {}
     },
     {
-        "label": "fetchAll",
+        "label": "fetch_all",
         "kind": 2,
         "importPath": "src.dal.dal_project",
         "description": "src.dal.dal_project",
-        "peekOfCode": "def fetchAll():\n    result = session_db.query(Project).all()\n    return result",
+        "peekOfCode": "def fetch_all():\n    result = session_db.query(Project).all()\n    return result",
         "detail": "src.dal.dal_project",
         "documentation": {}
     },
@@ -658,7 +658,7 @@
         "kind": 5,
         "importPath": "src.dal.dal_project",
         "description": "src.dal.dal_project",
-        "peekOfCode": "session = sessionmaker(\n    autocommit=False,\n    autoflush=False,\n    bind=engine,\n)\ndef fetchAll():\n    result = session_db.query(Project).all()\n    return result",
+        "peekOfCode": "session = sessionmaker(\n    autocommit=False,\n    autoflush=False,\n    bind=engine,\n)\ndef fetch_all():\n    result = session_db.query(Project).all()\n    return result",
         "detail": "src.dal.dal_project",
         "documentation": {}
     },
@@ -766,7 +766,7 @@
         "kind": 2,
         "importPath": "src.services.service_project",
         "description": "src.services.service_project",
-        "peekOfCode": "def get_project(project_id: str) -> ProjectDto:\n    try:\n        conn = sqlite3.connect(f\"db{os.sep}database_sqllite3.db\")\n        cursor = conn.cursor()\n        cursor.execute(\n            \"\"\"SELECT id, name, color, isArchived FROM projects WHERE id = ?\"\"\",\n            (project_id,),\n        )\n        project_data = cursor.fetchone()\n        ProjectRecord = get_tuple_from_type(",
+        "peekOfCode": "def get_project(project_id: str) -> ProjectDto:\n    try:\n        conn = sqlite3.connect(f\"db{os.sep}database_sqllite3.db\")\n        cursor = conn.cursor()\n        cursor.execute(\n            \"\"\"SELECT id, name, color, isArchived FROM projects WHERE id = ?\"\"\",\n            (project_id,),\n        )\n        project_data = cursor.fetch_one()\n        ProjectRecord = get_tuple_from_type(",
         "detail": "src.services.service_project",
         "documentation": {}
     },
@@ -775,7 +775,7 @@
         "kind": 2,
         "importPath": "src.services.service_project",
         "description": "src.services.service_project",
-        "peekOfCode": "def get_projects() -> list[ProjectDto]:\n    try:\n        projects = dal_project.fetchAll()\n        ProjectRecord = get_tuple_from_type(\n            ProjectDto\n        )  # Get namedtuple type dynamically\n        projects = []\n        for record in projects:\n            projects.append(\n                ProjectRecord(*record)",
+        "peekOfCode": "def get_projects() -> list[ProjectDto]:\n    try:\n        projects = dal_project.fetch_all()\n        ProjectRecord = get_tuple_from_type(\n            ProjectDto\n        )  # Get namedtuple type dynamically\n        projects = []\n        for record in projects:\n            projects.append(\n                ProjectRecord(*record)",
         "detail": "src.services.service_project",
         "documentation": {}
     },
