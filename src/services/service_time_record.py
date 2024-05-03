@@ -20,7 +20,7 @@ from utils.validators import (
     validate_time_format,
     validate_date_format,
 )
-from utils.parsers import extract_time_values, convert_str_datetime
+from utils.parsers import extract_time_values, convert_str_date, convert_str_datetime
 
 
 def validate_creation_data(data: TimeRecordStartDto, checkParent=True):
@@ -107,7 +107,7 @@ def start(data: TimeRecordStartDto) -> None:
     try:
         # TODO: Feat > automap the Dto to Model
         newRecord = TimeRecord()
-        newRecord.startAtDate = convert_str_datetime(data.startAtDate)
+        newRecord.startAtDate = convert_str_date(data.startAtDate)
         newRecord.task_id = data.task_id
         newRecord.project_id = data.project_id
         extract_start_time_values(data, newRecord)
@@ -122,7 +122,7 @@ def start(data: TimeRecordStartDto) -> None:
         return get_response_json(newRecord.id, True, message)
     except Exception as ex:
         print(ex)
-        return get_response_json(id, False, ex)
+        return get_response_json(id, False, ex, 500)
     finally:
         print("finished calling service_time_record.create")
 
@@ -165,9 +165,25 @@ def get_by_project(project_id: str) -> list[TimeRecord]:
         return jsonify(records)
     except Exception as ex:
         print(ex)
-        return get_response_json(clean_project_id, False, ex)
+        return get_response_json(clean_project_id, False, ex, 500)
     finally:
         print("finished calling service_time_record.get_by_project")
+
+
+def end_strickly_greater_than_start(
+    startDto: TimeRecordStartDto, endDto: TimeRecordEndDto
+):
+    fullStartDate = convert_str_datetime(
+        f"{startDto.startAtDate} {startDto.startAtTime}"
+    )
+    fullEndDate = convert_str_datetime(f"{endDto.endAtDate} {endDto.endAtTime}")
+
+    if fullStartDate > fullEndDate:
+        return get_response_json(
+            startDto.id, False, "The record cannot starts after it ends.", 400
+        )
+
+    return None
 
 
 def update(id: str, startDto: TimeRecordStartDto, endDto: TimeRecordEndDto, notes: str):
@@ -180,15 +196,18 @@ def update(id: str, startDto: TimeRecordStartDto, endDto: TimeRecordEndDto, note
     if result is not None:
         return result
 
+    result = end_strickly_greater_than_start(startDto, endDto)
+    if result is not None:
+        return result
+
     record = dal_time_record.fetch_by("id", clean_id)
     if record is None:
         return get_response_json(clean_id, False, "Record not found", 404)
 
     try:
-        # TODO > Feat: check (start date and time) > (end date and time)
-        record.startAtDate = convert_str_datetime(startDto.startAtDate)
+        record.startAtDate = convert_str_date(startDto.startAtDate)
         extract_start_time_values(startDto, record)
-        record.endAtDate = convert_str_datetime(endDto.endAtDate)
+        record.endAtDate = convert_str_date(endDto.endAtDate)
         extract_end_time_values(endDto, record)
         if notes is not None:
             record.notes = notes.strip()
@@ -198,7 +217,7 @@ def update(id: str, startDto: TimeRecordStartDto, endDto: TimeRecordEndDto, note
         return jsonify(record)
     except Exception as ex:
         print(ex)
-        return get_response_json(clean_id, False, ex)
+        return get_response_json(clean_id, False, ex, 500)
     finally:
         print("finished calling service_time_record.update")
 
@@ -214,7 +233,7 @@ def stop(id: str, data: TimeRecordEndDto) -> None:
         if record is None:
             return get_response_json(clean_id, False, "Record not found", 404)
 
-        record.endAtDate = convert_str_datetime(data.endAtDate)
+        record.endAtDate = convert_str_date(data.endAtDate)
         extract_end_time_values(data, record)
 
         dal_time_record.save()
@@ -222,7 +241,7 @@ def stop(id: str, data: TimeRecordEndDto) -> None:
         return jsonify(record)
     except Exception as ex:
         print(ex)
-        return get_response_json(clean_id, False, ex)
+        return get_response_json(clean_id, False, ex, 500)
     finally:
         print("finished calling service_time_record.stop")
 
@@ -241,7 +260,7 @@ def update_notes(id: str, notes: str) -> None:
         return jsonify(record)
     except Exception as ex:
         print(ex)
-        return get_response_json(clean_id, False, ex)
+        return get_response_json(clean_id, False, ex, 500)
     finally:
         print("finished calling service_time_record.update_notes")
 
@@ -258,6 +277,6 @@ def delete(id: str) -> bool:
         return get_response_json(clean_id, True, message)
     except Exception as ex:
         print(ex)
-        return get_response_json(clean_id, False, ex)
+        return get_response_json(clean_id, False, ex, 500)
     finally:
         print("finished calling service_time_record.delete")

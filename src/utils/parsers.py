@@ -1,10 +1,26 @@
 from functools import partial
 from datetime import datetime
 
-from utils.validators import validate_date_format, validate_time_format
+from utils.validators import (
+    validate_datetime_format,
+    validate_date_format,
+    validate_time_format,
+)
 
 
-def convert_str_datetime(date_str: str):
+def convert_str_datetime(datetime_str: str):
+    try:
+        # Validate format
+        result = validate_datetime_format(datetime_str)
+        if result is False:
+            return False
+
+        return result
+    except ValueError:
+        return None
+
+
+def convert_str_date(date_str: str):
     try:
         # Validate format
         result = validate_date_format(date_str)

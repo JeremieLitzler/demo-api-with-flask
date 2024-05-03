@@ -59,3 +59,20 @@ def validate_date_format(date_str):
         return date
     except ValueError:
         return False
+
+
+def validate_datetime_format(date_str):
+    """
+    This function validates if the given string is in the format "YYYY-MM-DD HH:mm:ss".
+
+    Args:
+        date_str: The string to validate.
+
+    Returns:
+        True if the format is valid, False otherwise.
+    """
+    try:
+        date = date_str_format(date_str, "%Y-%m-%d %H:%M:%S")
+        return date
+    except ValueError:
+        return False
