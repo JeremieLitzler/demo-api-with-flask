@@ -50,11 +50,16 @@ Content-Type: application/json
 
 {
   "name": "New api/v1.0/task",
-  "project_id": "d10a576cbd504734bb6a80cd85124b56"
+  "project_id": "78d104f85b61447db27d11a4caa89a0e"
 }
 
-###
-GET http://127.0.0.1:5000/api/v1.0/task/e71a65a62bc7417097ae906afb88fc4b HTTP/1.1
+### Retrieve non existing record
+GET http://127.0.0.1:5000/api/v1.0/task/not_exist HTTP/1.1
+content-type: application/json
+
+
+### Retrieve existing record
+GET http://127.0.0.1:5000/api/v1.0/task/5c002b4b9c7e4e179a90153852a085bc HTTP/1.1
 content-type: application/json
 
 
@@ -63,7 +68,7 @@ GET http://127.0.0.1:5000/api/v1.0/task/all HTTP/1.1
 content-type: application/json
 
 ###
-PUT http://127.0.0.1:5000/api/v1.0/task/e71a65a62bc7417097ae906afb88fc4b HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/task/5c002b4b9c7e4e179a90153852a085bc HTTP/1.1
 content-type: application/json
 
 {
@@ -71,7 +76,7 @@ content-type: application/json
 }
 
 ###
-PUT http://127.0.0.1:5000/api/v1.0/task/e71a65a62bc7417097ae906afb88fc4b HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/task/5c002b4b9c7e4e179a90153852a085bc HTTP/1.1
 content-type: application/json
 
 {
@@ -79,7 +84,7 @@ content-type: application/json
 }
 
 ###
-PUT http://127.0.0.1:5000/api/v1.0/task/e71a65a62bc7417097ae906afb88fc4b HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/task/5c002b4b9c7e4e179a90153852a085bc HTTP/1.1
 content-type: application/json
 
 {
@@ -87,5 +92,5 @@ content-type: application/json
 }
 
 ###
-DELETE http://127.0.0.1:5000/api/v1.0/task/e71a65a62bc7417097ae906afb88fc4b HTTP/1.1
+DELETE http://127.0.0.1:5000/api/v1.0/task/5c002b4b9c7e4e179a90153852a085bc HTTP/1.1
 content-type: application/json

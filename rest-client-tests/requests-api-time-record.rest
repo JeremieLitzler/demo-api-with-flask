@@ -1,0 +1,177 @@
+###
+GET http://127.0.0.1:5000/api/v1.0/record/byProject/no_results HTTP/1.1
+content-type: application/json
+
+###
+GET http://127.0.0.1:5000/api/v1.0/record/byTask/no_results HTTP/1.1
+content-type: application/json
+
+### No JSON payload
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{}
+
+### Invalid startAtDate
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{
+  "startAtDate":  "not_date"
+}
+
+### Empty startAtDate
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{
+  "startAtDate":  ""
+}
+
+### Empty startAtTime
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{
+  "startAtDate":  "2024-05-03",
+  "startAtTime": ""
+}
+### Invalid startAtTime
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{
+  "startAtDate":  "2024-05-03",
+  "startAtTime": "not_time"
+}
+
+### Missing task id or project id
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{
+  "startAtDate":  "2024-05-03",
+  "startAtTime": "10:29:00"
+}
+
+### Missing task id or project id
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{
+  "startAtDate":  "2024-05-03",
+  "startAtTime": "10:29:00",
+  "taskId": "not_exist"
+}
+
+### Missing task id or project id
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{
+  "startAtDate":  "2024-05-03",
+  "startAtTime": "10:29:00",
+  "projectId": "not_exist"
+}
+
+### Start record with project id
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{
+  "startAtDate":  "2024-05-03",
+  "startAtTime": "10:29:00",
+  "projectId": "9c5702af5966417d8710dd32e307644e"
+}
+
+### Start record with task id
+POST http://127.0.0.1:5000/api/v1.0/record HTTP/1.1
+Content-Type: application/json
+
+{
+  "startAtDate":  "2024-05-03",
+  "startAtTime": "10:29:00",
+  "taskId": "7215f6bcf14f4237ad408e429e61a4f5"
+}
+
+### Read an inexistent record
+GET http://127.0.0.1:5000/api/v1.0/record/not_exist HTTP/1.1
+content-type: application/json
+
+### Read an existing record
+GET http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b HTTP/1.1
+content-type: application/json
+
+### Update record's notes (no payload)
+PUT http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b/notes HTTP/1.1
+Content-Type: application/json
+
+{
+}
+
+### Update record's notes
+PUT http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b/notes HTTP/1.1
+Content-Type: application/json
+
+{
+  "notes":  "Edited"
+}
+
+### Stop record (no payload)
+PUT http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b/stop HTTP/1.1
+Content-Type: application/json
+
+{
+}
+
+### Stop record (empty end date)
+PUT http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b/stop HTTP/1.1
+Content-Type: application/json
+
+{
+  "endAtDate": ""
+}
+
+### Stop record (invalid end date)
+PUT http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b/stop HTTP/1.1
+Content-Type: application/json
+
+{
+  "endAtDate": "not_date"
+}
+
+
+### Stop record (empty end time)
+PUT http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b/stop HTTP/1.1
+Content-Type: application/json
+
+{
+  "endAtDate": "2024-05-03",
+  "endAtTime": ""
+}
+
+### Stop record (invalid end date)
+PUT http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b/stop HTTP/1.1
+Content-Type: application/json
+
+{
+  "endAtDate": "2024-05-03",
+  "endAtTime": "not_time"
+}
+
+### Stop record (invalid end date)
+PUT http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b/stop HTTP/1.1
+Content-Type: application/json
+
+{
+  "endAtDate": "2024-05-03",
+  "endAtTime": "12:21:00"
+}
+
+### Delete existing record
+DELETE http://127.0.0.1:5000/api/v1.0/record/f95f1932113c40158f34443934dca28b HTTP/1.1
+content-type: application/json
+
+### Delete non existing record
+DELETE http://127.0.0.1:5000/api/v1.0/record/not_exist HTTP/1.1
+content-type: application/json

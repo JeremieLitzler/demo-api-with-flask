@@ -107,13 +107,15 @@ class TimeRecord(Model):
     startAtDate: Mapped[datetime] = mapped_column(
         doc="The date (year-month-day) the record was started"
     )
-    endAtHourTime: Mapped[int]
-    endAtMinuteTime: Mapped[int]
-    endAtSecondTime: Mapped[int]
+    endAtHourTime: Mapped[int] = mapped_column(init=False, nullable=True)
+    endAtMinuteTime: Mapped[int] = mapped_column(init=False, nullable=True)
+    endAtSecondTime: Mapped[int] = mapped_column(init=False, nullable=True)
     endAtDate: Mapped[datetime] = mapped_column(
-        doc="The date (year-month-day) the record was stopped"
+        init=False,
+        nullable=True,
+        doc="The date (year-month-day) the record was stopped",
     )
-    notes: Mapped[str]
+    notes: Mapped[str] = mapped_column(init=False, nullable=True)
     project_id: Mapped[str] = mapped_column(
         ForeignKey("boosted_web_project.id", ondelete="CASCADE"), nullable=True
     )
@@ -133,7 +135,7 @@ class TimeRecord(Model):
 
     def __init__(self, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = uuid4()
+            kwargs["id"] = uuid4().hex
         super().__init__(**kwargs)
 
     # For debugging
