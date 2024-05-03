@@ -56,6 +56,19 @@ def api_record_update_notes(id):
     return response
 
 
+@app.route("/api/v1.0/record/<string:id>", methods=["PUT"])
+def api_record_update(id):
+    data = request.get_json()
+    if not data:
+        return get_response_json(None, False, "No JSON data", 400)
+
+    startDto = TimeRecordStartDto.parseJson(data, id)
+    endDto = TimeRecordEndDto.parseJson(data, id)
+    notes = data.get("notes")
+    response = update(id, startDto, endDto, notes)
+    return response
+
+
 @app.route("/api/v1.0/record/<string:id>", methods=["DELETE"])
 def api_record_delete(id):
     response = delete(id)

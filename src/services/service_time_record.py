@@ -23,7 +23,7 @@ from utils.validators import (
 from utils.parsers import extract_time_values, convert_str_datetime
 
 
-def validate_creation_data(data: TimeRecordStartDto, checkProject=True, checkTask=True):
+def validate_creation_data(data: TimeRecordStartDto, checkParent=True):
     result = validate_date_format(data.startAtDate)
     if result is False:
         return get_response_json(
@@ -35,6 +35,9 @@ def validate_creation_data(data: TimeRecordStartDto, checkProject=True, checkTas
         return get_response_json(
             data.id, False, "start time is not format in HH:mm:ss", 400
         )
+
+    if checkParent is False:
+        return None
 
     task_or_project_specified = (
         data.task_id is not None and data.task_id.strip() != ""
@@ -167,6 +170,39 @@ def get_by_project(project_id: str) -> list[TimeRecord]:
         print("finished calling service_time_record.get_by_project")
 
 
+def update(id: str, startDto: TimeRecordStartDto, endDto: TimeRecordEndDto, notes: str):
+    clean_id = sanitize_id(id)
+    result = validate_stopping_data(endDto)
+    if result is not None:
+        return result
+
+    result = validate_creation_data(startDto, checkParent=False)
+    if result is not None:
+        return result
+
+    record = dal_time_record.fetch_by("id", clean_id)
+    if record is None:
+        return get_response_json(clean_id, False, "Record not found", 404)
+
+    try:
+        # TODO > Feat: check (start date and time) > (end date and time)
+        record.startAtDate = convert_str_datetime(startDto.startAtDate)
+        extract_start_time_values(startDto, record)
+        record.endAtDate = convert_str_datetime(endDto.endAtDate)
+        extract_end_time_values(endDto, record)
+        if notes is not None:
+            record.notes = notes.strip()
+
+        dal_time_record.save()
+
+        return jsonify(record)
+    except Exception as ex:
+        print(ex)
+        return get_response_json(clean_id, False, ex)
+    finally:
+        print("finished calling service_time_record.update")
+
+
 def stop(id: str, data: TimeRecordEndDto) -> None:
     clean_id = sanitize_id(id)
     result = validate_stopping_data(data)
@@ -178,6 +214,7 @@ def stop(id: str, data: TimeRecordEndDto) -> None:
         if record is None:
             return get_response_json(clean_id, False, "Record not found", 404)
 
+        record.endAtDate = convert_str_datetime(data.endAtDate)
         extract_end_time_values(data, record)
 
         dal_time_record.save()
@@ -187,7 +224,7 @@ def stop(id: str, data: TimeRecordEndDto) -> None:
         print(ex)
         return get_response_json(clean_id, False, ex)
     finally:
-        print("finished calling service_time_record.update")
+        print("finished calling service_time_record.stop")
 
 
 def update_notes(id: str, notes: str) -> None:
@@ -206,7 +243,7 @@ def update_notes(id: str, notes: str) -> None:
         print(ex)
         return get_response_json(clean_id, False, ex)
     finally:
-        print("finished calling service_time_record.update")
+        print("finished calling service_time_record.update_notes")
 
 
 # TODO > Feat: cannot delete a task if records exist for the task
