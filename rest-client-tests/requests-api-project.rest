@@ -45,11 +45,11 @@ GET http://127.0.0.1:5000/api/v1.0/projects HTTP/1.1
 content-type: application/json
 
 ### Read a project
-GET http://127.0.0.1:5000/api/v1.0/projects/0fab2d6358da4a95ba0c7af8126390af HTTP/1.1
+GET http://127.0.0.1:5000/api/v1.0/projects/b52b5bf6e7b648929c64391b6b199b47 HTTP/1.1
 content-type: application/json
 
 ###  Update a project name
-PUT http://127.0.0.1:5000/api/v1.0/projects/0fab2d6358da4a95ba0c7af8126390af HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/projects/b52b5bf6e7b648929c64391b6b199b47 HTTP/1.1
 content-type: application/json
 
 {
@@ -57,7 +57,7 @@ content-type: application/json
 }
 
 ### Update a project name and color
-PUT http://127.0.0.1:5000/api/v1.0/projects/0fab2d6358da4a95ba0c7af8126390af HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/projects/b52b5bf6e7b648929c64391b6b199b47 HTTP/1.1
 content-type: application/json
 
 {
@@ -68,5 +68,5 @@ content-type: application/json
 ### TODO > Add an endpoint to archive a project
 
 ### Delete a project
-DELETE http://127.0.0.1:5000/api/v1.0/projects/0fab2d6358da4a95ba0c7af8126390af HTTP/1.1
+DELETE http://127.0.0.1:5000/api/v1.0/projects/b52b5bf6e7b648929c64391b6b199b47 HTTP/1.1
 content-type: application/json

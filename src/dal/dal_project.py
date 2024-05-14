@@ -23,6 +23,8 @@ def add(project: Project):
     session_db.add(project)
     save()
     print(f"Inserted {project.name} to the DB")
+    session_db.refresh(project)
+    return project
 
 
 # Get all the projects

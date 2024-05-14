@@ -7,7 +7,7 @@ import json
 from sqlalchemy.orm import scoped_session
 
 from app import app
-from utils.api_utils import get_response_json
+from utils.api_utils import get_response_json, handle_ex
 from dto.TimeRecordStartDto import TimeRecordStartDto
 from dto.TimeRecordEndDto import TimeRecordEndDto
 from dao.models import TimeRecord
@@ -162,10 +162,10 @@ def get_by_project(project_id: str) -> list[TimeRecord]:
     clean_project_id = sanitize_id(project_id)
     try:
         records = dal_time_record.fetch_by("project_id", clean_project_id)
-        return jsonify(records)
+        return records
     except Exception as ex:
         print(ex)
-        return get_response_json(clean_project_id, False, ex, 500)
+        handle_ex(ex)
     finally:
         print("finished calling service_time_record.get_by_project")
 
