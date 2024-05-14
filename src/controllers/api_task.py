@@ -3,6 +3,7 @@ import json
 
 from app import app
 from services.service_task import *
+from services.service_time_record import get_by_task
 from dto.TaskDto import TaskDto
 
 
@@ -43,3 +44,9 @@ def api_task_update(id):
 def api_task_delete(id):
     response = delete(id)
     return response
+
+
+@app.route("/api/v1.0/tasks/<string:id>/records", methods=["GET"])
+def api_task_get_records(id):
+    records = get_by_task(id)
+    return records

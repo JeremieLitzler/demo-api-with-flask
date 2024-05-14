@@ -3,6 +3,7 @@ import json
 
 from app import app
 from services.service_project import *
+from services.service_time_record import get_by_project
 from dto.ProjectDto import ProjectDto
 
 
@@ -43,3 +44,9 @@ def api_project_update(id):
 def api_project_delete(id):
     response = delete(id)
     return response
+
+
+@app.route("/api/v1.0/projects/<string:id>/records", methods=["GET"])
+def api_project_get_records(id):
+    records = get_by_project(id)
+    return records

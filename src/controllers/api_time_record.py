@@ -7,7 +7,7 @@ from dto.TimeRecordStartDto import TimeRecordStartDto
 from dto.TimeRecordEndDto import TimeRecordEndDto
 
 
-@app.route("/api/v1.0/record", methods=["POST"])
+@app.route("/api/v1.0/records", methods=["POST"])
 def api_record_add():
     data = request.get_json()
     if not data:
@@ -18,25 +18,13 @@ def api_record_add():
     return response
 
 
-@app.route("/api/v1.0/record/byTask/<string:id>", methods=["GET"])
-def api_record_get_by_task(id):
-    records = get_by_task(id)
-    return records
-
-
-@app.route("/api/v1.0/record/byProject/<string:id>", methods=["GET"])
-def api_record_get_by_project(id):
-    records = get_by_project(id)
-    return records
-
-
-@app.route("/api/v1.0/record/<string:id>", methods=["GET"])
+@app.route("/api/v1.0/records/<string:id>", methods=["GET"])
 def api_record_get(id: str):
     response = get_one(id)
     return response
 
 
-@app.route("/api/v1.0/record/<string:id>/stop", methods=["PUT"])
+@app.route("/api/v1.0/records/<string:id>/stop", methods=["PUT"])
 def api_record_update_stop(id):
     data = request.get_json()
     if not data:
@@ -46,7 +34,7 @@ def api_record_update_stop(id):
     return response
 
 
-@app.route("/api/v1.0/record/<string:id>/notes", methods=["PUT"])
+@app.route("/api/v1.0/records/<string:id>/notes", methods=["PUT"])
 def api_record_update_notes(id):
     data = request.get_json()
     if not data:
@@ -56,7 +44,7 @@ def api_record_update_notes(id):
     return response
 
 
-@app.route("/api/v1.0/record/<string:id>", methods=["PUT"])
+@app.route("/api/v1.0/records/<string:id>", methods=["PUT"])
 def api_record_update(id):
     data = request.get_json()
     if not data:
@@ -69,7 +57,7 @@ def api_record_update(id):
     return response
 
 
-@app.route("/api/v1.0/record/<string:id>", methods=["DELETE"])
+@app.route("/api/v1.0/records/<string:id>", methods=["DELETE"])
 def api_record_delete(id):
     response = delete(id)
     return response
