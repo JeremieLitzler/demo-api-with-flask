@@ -20,11 +20,40 @@ from dao.models import Project
 import dal.dal_project as dal_project
 
 
-def add(project_data: ProjectDto) -> None:
+def validate_project_name(name: str, id: str = None):
+    if name == None:
+        return get_response_json(id, False, "Project name is required", 422)
+    if name.strip() == "":
+        return get_response_json(id, False, "Project name is empty", 422)
 
+    return None
+
+
+def validate_project_color(color: str, id: str = None):
+    if color == None:
+        return get_response_json(id, False, "Color is required", 422)
+    if color.strip() == "":
+        return get_response_json(id, False, "Color is empty", 422)
+
+    return None
+
+
+def validate(project_data: ProjectDto):
+    result = validate_project_name(project_data.name, project_data.id)
+    if result is not None:
+        return result
+
+    result = validate_project_color(project_data.color, project_data.id)
+    return result
+
+
+def add(project_data: ProjectDto) -> None:
     try:
 
         # TODO: Feat > automap the Dto to Model
+        validation = validate(project_data)
+        if validation is not None:
+            return validation
 
         new_project = Project(name=project_data.name, color=project_data.color)
         dal_project.add(new_project)
@@ -133,7 +162,7 @@ def delete(id: str) -> bool:
 
         message = "Project deleted successfully" if result else "No record affected"
 
-        return get_response_json(id, True, message)
+        return get_response_json(id, True, message, 204)
 
     except Exception as ex:
 
