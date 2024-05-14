@@ -57,7 +57,7 @@ def add(project_data: ProjectDto) -> None:
         # Return True if at least one row was added
 
         message = "null" if True else "No record affected"
-        return get_response_json(new_project.id, True, message)
+        return get_response_json(new_project.id, True, message, 201)
     except Exception as ex:
         print(ex)
         return get_response_json(id, False, ex)

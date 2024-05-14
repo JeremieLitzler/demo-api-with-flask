@@ -27,13 +27,13 @@ def validate_creation_data(data: TimeRecordStartDto, checkParent=True):
     result = validate_date_format(data.startAtDate)
     if result is False:
         return get_response_json(
-            data.id, False, "start date is not format in YYYY-MM-DD", 400
+            data.id, False, "start date is not format in YYYY-MM-DD", 422
         )
 
     result = validate_time_format(data.startAtTime)
     if result is False:
         return get_response_json(
-            data.id, False, "start time is not format in HH:mm:ss", 400
+            data.id, False, "start time is not format in HH:mm:ss", 422
         )
 
     if checkParent is False:
@@ -44,7 +44,7 @@ def validate_creation_data(data: TimeRecordStartDto, checkParent=True):
     ) or (data.project_id is not None and data.project_id.strip() != "")
     if task_or_project_specified == False:
         return get_response_json(
-            data.id, False, "You need to provide a task or a project", 400
+            data.id, False, "You need to provide a task or a project", 422
         )
 
     # TODO > Feat : check project or task exist
@@ -70,13 +70,13 @@ def validate_stopping_data(data: TimeRecordEndDto):
     result = validate_date_format(data.endAtDate)
     if result is False:
         return get_response_json(
-            data.id, False, "end date is not format in YYYY-MM-DD", 400
+            data.id, False, "end date is not format in YYYY-MM-DD", 422
         )
 
     result = validate_time_format(data.endAtTime)
     if result is False:
         return get_response_json(
-            data.id, False, "end time is not format in HH:mm:ss", 400
+            data.id, False, "end time is not format in HH:mm:ss", 422
         )
 
 
@@ -119,7 +119,7 @@ def start(data: TimeRecordStartDto) -> None:
 
         # Return True if at least one row was added
         message = "null" if True else "No record affected"
-        return get_response_json(newRecord.id, True, message)
+        return get_response_json(newRecord.id, True, message, 201)
     except Exception as ex:
         print(ex)
         return get_response_json(id, False, ex, 500)
@@ -130,7 +130,7 @@ def start(data: TimeRecordStartDto) -> None:
 def get_one(id: str, noJson=False):
     clean_id = sanitize_id(id)
     if clean_id == "":
-        return get_response_json(clean_id, False, "ID is required", 400)
+        return get_response_json(clean_id, False, "ID is required", 422)
 
     try:
         record = dal_time_record.fetch_by("id", clean_id)
@@ -180,7 +180,7 @@ def end_strickly_greater_than_start(
 
     if fullStartDate > fullEndDate:
         return get_response_json(
-            startDto.id, False, "The record cannot starts after it ends.", 400
+            startDto.id, False, "The record cannot starts after it ends.", 422
         )
 
     return None
@@ -269,7 +269,7 @@ def update_notes(id: str, notes: str) -> None:
 def delete(id: str) -> bool:
     clean_id = id.strip() if id is not None else ""
     if clean_id == "":
-        return get_response_json(clean_id, False, "ID is required", 400)
+        return get_response_json(clean_id, False, "ID is required", 422)
 
     try:
         result = dal_time_record.delete(clean_id)

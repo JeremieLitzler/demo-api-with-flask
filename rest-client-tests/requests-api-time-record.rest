@@ -1,9 +1,17 @@
-###
+### List records for non existant project
 GET http://127.0.0.1:5000/api/v1.0/projects/no_results/records HTTP/1.1
 content-type: application/json
 
-###
+### List records for existant project
+GET http://127.0.0.1:5000/api/v1.0/projects/fd8f1cd8e2c3457bba7ffce85437f8e4/records HTTP/1.1
+content-type: application/json
+
+### List records for non existant task
 GET http://127.0.0.1:5000/api/v1.0/tasks/no_results/records HTTP/1.1
+content-type: application/json
+
+### List records for existant task
+GET http://127.0.0.1:5000/api/v1.0/tasks/8e08fd1faa1740d2a3081fedec9571df/records HTTP/1.1
 content-type: application/json
 
 ### No JSON payload
@@ -81,7 +89,7 @@ Content-Type: application/json
 {
   "startAtDate":  "2024-05-03",
   "startAtTime": "10:29:00",
-  "projectId": "6e29374a9f1441cbab01f89924a198f0"
+  "projectId": "fd8f1cd8e2c3457bba7ffce85437f8e4"
 }
 
 ### Start record with task id
@@ -91,7 +99,7 @@ Content-Type: application/json
 {
   "startAtDate":  "2024-05-03",
   "startAtTime": "10:29:00",
-  "taskId": "7215f6bcf14f4237ad408e429e61a4f5"
+  "taskId": "8e08fd1faa1740d2a3081fedec9571df"
 }
 
 ### Read an inexistent record
@@ -99,18 +107,18 @@ GET http://127.0.0.1:5000/api/v1.0/records/not_exist HTTP/1.1
 content-type: application/json
 
 ### Read an existing record
-GET http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6 HTTP/1.1
+GET http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2 HTTP/1.1
 content-type: application/json
 
 ### Update record's notes (no payload)
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6/notes HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2/notes HTTP/1.1
 Content-Type: application/json
 
 {
 }
 
 ### Update record's notes
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6/notes HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2/notes HTTP/1.1
 Content-Type: application/json
 
 {
@@ -118,14 +126,14 @@ Content-Type: application/json
 }
 
 ### Stop record (no payload)
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6/stop HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2/stop HTTP/1.1
 Content-Type: application/json
 
 {
 }
 
 ### Stop record (empty end date)
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6/stop HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2/stop HTTP/1.1
 Content-Type: application/json
 
 {
@@ -133,7 +141,7 @@ Content-Type: application/json
 }
 
 ### Stop record (invalid end date)
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6/stop HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2/stop HTTP/1.1
 Content-Type: application/json
 
 {
@@ -142,7 +150,7 @@ Content-Type: application/json
 
 
 ### Stop record (empty end time)
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6/stop HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2/stop HTTP/1.1
 Content-Type: application/json
 
 {
@@ -151,7 +159,7 @@ Content-Type: application/json
 }
 
 ### Stop record (invalid end date)
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6/stop HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2/stop HTTP/1.1
 Content-Type: application/json
 
 {
@@ -160,7 +168,7 @@ Content-Type: application/json
 }
 
 ### Stop record (valid end date and time)
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6/stop HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2/stop HTTP/1.1
 Content-Type: application/json
 
 {
@@ -169,7 +177,7 @@ Content-Type: application/json
 }
 
 ### update record (start greater than end)
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6 HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -181,7 +189,7 @@ Content-Type: application/json
 }
 
 ### update record (valid start, end and notes)
-PUT http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6 HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -194,7 +202,7 @@ Content-Type: application/json
 
 
 ### Delete existing record
-DELETE http://127.0.0.1:5000/api/v1.0/records/5222c29367a94bbfa3ee082a6a2d45f6 HTTP/1.1
+DELETE http://127.0.0.1:5000/api/v1.0/records/9408bb1798324deeaa544174b9beaeb2 HTTP/1.1
 content-type: application/json
 
 ### Delete non existing record
