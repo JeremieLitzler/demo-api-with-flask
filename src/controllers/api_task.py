@@ -6,7 +6,7 @@ from services.service_task import *
 from dto.TaskDto import TaskDto
 
 
-@app.route("/api/v1.0/task", methods=["POST"])
+@app.route("/api/v1.0/tasks", methods=["POST"])
 def api_task_add():
     data = request.get_json()
     if not data:
@@ -16,19 +16,19 @@ def api_task_add():
     return response
 
 
-@app.route("/api/v1.0/task/all", methods=["GET"])
+@app.route("/api/v1.0/tasks", methods=["GET"])
 def api_task_get_all():
     tasks = get_all()
     return tasks
 
 
-@app.route("/api/v1.0/task/<string:id>", methods=["GET"])
+@app.route("/api/v1.0/tasks/<string:id>", methods=["GET"])
 def api_task_get(id: int):
     response = get_one(id)
     return response
 
 
-@app.route("/api/v1.0/task/<string:id>", methods=["PUT"])
+@app.route("/api/v1.0/tasks/<string:id>", methods=["PUT"])
 def api_task_update(id):
     # Logic to update a specific task by ID
     data = request.get_json()
@@ -39,7 +39,7 @@ def api_task_update(id):
     return response
 
 
-@app.route("/api/v1.0/task/<string:id>", methods=["DELETE"])
+@app.route("/api/v1.0/tasks/<string:id>", methods=["DELETE"])
 def api_task_delete(id):
     response = delete(id)
     return response

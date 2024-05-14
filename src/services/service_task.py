@@ -16,21 +16,21 @@ import services.service_project as service_project
 
 def validate(data: TaskDto, checkProject=True):
     if data.name == None:
-        return get_response_json(None, False, "Task name is required", 400)
+        return get_response_json(None, False, "Task name is required", 422)
     if data.name.strip() == "":
-        return get_response_json(None, False, "Task name is empty", 400)
+        return get_response_json(None, False, "Task name is empty", 422)
 
     if checkProject == False:
         return
 
     if data.project_id == None:
-        return get_response_json(None, False, "Project is required", 400)
+        return get_response_json(None, False, "Project is required", 422)
     if data.project_id.strip() == "":
-        return get_response_json(None, False, "Project is empty", 400)
+        return get_response_json(None, False, "Project is empty", 422)
 
     project = service_project.get_one(data.project_id, True)
     if project == None:
-        return get_response_json(None, False, "Project doesn't exist", 400)
+        return get_response_json(None, False, "Project doesn't exist", 422)
 
     return None
 
@@ -61,7 +61,7 @@ def create(data: TaskDto) -> None:
 
 def get_one(id: str, noJson=False) -> TaskDto:
     if id.strip() == "":
-        return get_response_json(id, False, "ID is required", 400)
+        return get_response_json(id, False, "ID is required", 422)
 
     try:
         task = dal_task.fetch_one(id)
@@ -115,12 +115,12 @@ def update(data: TaskDto) -> None:
 # TODO > Feat: cannot delete a task if records exist for the task
 def delete(id: str) -> bool:
     if id.strip() == "":
-        return get_response_json(id, False, "ID is required", 400)
+        return get_response_json(id, False, "ID is required", 422)
 
     try:
         result = dal_task.delete(id)
         message = "Task deleted successfully" if result else "No record affected"
-        return get_response_json(id, True, message)
+        return get_response_json(id, True, message, 204)
     except Exception as ex:
         print(ex)
         return get_response_json(id, False, ex)
