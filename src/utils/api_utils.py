@@ -16,7 +16,7 @@ def get_response_json(id: int, success: bool, message: str = "null", httpCode=20
         str: The JSON object
     """
     return (
-        jsonify({"id": f"{id}", "success": f"{success}", "message": f"{message}"}),
+        {"id": f"{id}", "success": f"{success}", "message": f"{message}"},
         httpCode,
     )
 
@@ -50,12 +50,9 @@ def raise_business_error(
 
 
 def handle_ex(ex: any):
-    underlyingExMessage = None
+    underlyingExMessage = ""
     if ex.args is not None and len(ex.args) > 0:
         underlyingExMessage = ex.args[0]
-
-    if hasattr(ex, "data"):
-        underlyingExMessage = ex.data.get("message", None)
 
     httpCode = 500
     if hasattr(ex, "code"):
@@ -67,7 +64,22 @@ def handle_ex(ex: any):
     message = "Internal Error. See details."
     if hasattr(ex, "message"):
         message = ex.message
-    if hasattr(ex, "description"):
-        message = ex.description
 
-    abort(httpCode, message, details={"inner_ex": f"{underlyingExMessage}"})
+    inner_message = ""
+    if hasattr(ex, "data"):
+        inner_message = ex.data.get("message", None)
+        message = "Business Error. See details."
+
+    description = ""
+    if hasattr(ex, "description"):
+        description = ex.description
+
+    abort(
+        httpCode,
+        message,
+        details={
+            "inner_message": f"{inner_message}",
+            "description": f"{description}",
+            "inner_exception_message": f"{underlyingExMessage}",
+        },
+    )
