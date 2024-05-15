@@ -15,6 +15,12 @@ project = api.model(
             default=False,
             description="Flag indicating if the project is archived or not.",
         ),
+        "created_at": fields.DateTime(
+            description="The date and time of creation of the project"
+        ),
+        "updated_at": fields.DateTime(
+            description="The date and time of last project´s update"
+        ),
     },
 )
 
