@@ -12,46 +12,37 @@ Content-Type: application/json
 
 {}
 
-### Invalid startAtDate
+### Invalid start_at_date
 POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
 Content-Type: application/json
 
 {
-  "startAtDate":  "not_date"
+  "start_at_date":  "not_date"
 }
 
-### Empty startAtDate
+### Empty start_at_date
 POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
 Content-Type: application/json
 
 {
-  "startAtDate":  ""
+  "start_at_date":  ""
 }
 
-### Empty startAtTime
+### Empty start_at_time
 POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
 Content-Type: application/json
 
 {
-  "startAtDate":  "2024-05-03",
-  "startAtTime": ""
+  "start_at_date":  "2024-05-03",
+  "start_at_time": ""
 }
-### Invalid startAtTime
+### Invalid start_at_time
 POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
 Content-Type: application/json
 
 {
-  "startAtDate":  "2024-05-03",
-  "startAtTime": "not_time"
-}
-
-### Missing task id or project id
-POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
-Content-Type: application/json
-
-{
-  "startAtDate":  "2024-05-03",
-  "startAtTime": "10:29:00"
+  "start_at_date":  "2024-05-03",
+  "start_at_time": "not_time"
 }
 
 ### Missing task id or project id
@@ -59,8 +50,17 @@ POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
 Content-Type: application/json
 
 {
-  "startAtDate":  "2024-05-03",
-  "startAtTime": "10:29:00",
+  "start_at_date":  "2024-05-03",
+  "start_at_time": "10:29:00"
+}
+
+### Missing task id or project id
+POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
+Content-Type: application/json
+
+{
+  "start_at_date":  "2024-05-03",
+  "start_at_time": "10:29:00",
   "taskId": "not_exist"
 }
 
@@ -69,8 +69,8 @@ POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
 Content-Type: application/json
 
 {
-  "startAtDate":  "2024-05-03",
-  "startAtTime": "10:29:00",
+  "start_at_date":  "2024-05-03",
+  "start_at_time": "10:29:00",
   "projectId": "not_exist"
 }
 
@@ -79,8 +79,8 @@ POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
 Content-Type: application/json
 
 {
-  "startAtDate":  "2024-05-03",
-  "startAtTime": "10:29:00",
+  "start_at_date":  "2024-05-03",
+  "start_at_time": "10:29:00",
   "projectId": "ef3306361ee747e8ba43b7ed0071c2e2"
 }
 
@@ -93,8 +93,8 @@ POST http://127.0.0.1:5000/api/v1.0/records HTTP/1.1
 Content-Type: application/json
 
 {
-  "startAtDate":  "2024-05-03",
-  "startAtTime": "10:29:00",
+  "start_at_date":  "2024-05-03",
+  "start_at_time": "10:29:00",
   "taskId": "fda6635fac3242539b5521982e78938f"
 }
 
@@ -138,7 +138,7 @@ PUT http://127.0.0.1:5000/api/v1.0/records/b306d92413c94aefb9ca10150dfcd7dd/stop
 Content-Type: application/json
 
 {
-  "endAtDate": ""
+  "end_at_date": ""
 }
 
 ### Stop record (invalid end date)
@@ -146,7 +146,7 @@ PUT http://127.0.0.1:5000/api/v1.0/records/b306d92413c94aefb9ca10150dfcd7dd/stop
 Content-Type: application/json
 
 {
-  "endAtDate": "not_date"
+  "end_at_date": "not_date"
 }
 
 
@@ -155,8 +155,8 @@ PUT http://127.0.0.1:5000/api/v1.0/records/b306d92413c94aefb9ca10150dfcd7dd/stop
 Content-Type: application/json
 
 {
-  "endAtDate": "2024-05-03",
-  "endAtTime": ""
+  "end_at_date": "2024-05-03",
+  "end_at_time": ""
 }
 
 ### Stop record (invalid end date)
@@ -164,8 +164,8 @@ PUT http://127.0.0.1:5000/api/v1.0/records/b306d92413c94aefb9ca10150dfcd7dd/stop
 Content-Type: application/json
 
 {
-  "endAtDate": "2024-05-03",
-  "endAtTime": "not_time"
+  "end_at_date": "2024-05-03",
+  "end_at_time": "not_time"
 }
 
 ### Stop record (valid end date and time)
@@ -173,8 +173,8 @@ PUT http://127.0.0.1:5000/api/v1.0/records/b306d92413c94aefb9ca10150dfcd7dd/stop
 Content-Type: application/json
 
 {
-  "endAtDate": "2024-05-03",
-  "endAtTime": "12:21:00"
+  "end_at_date": "2024-05-03",
+  "end_at_time": "12:21:00"
 }
 
 ### update record (start greater than end)
@@ -182,10 +182,10 @@ PUT http://127.0.0.1:5000/api/v1.0/records/b306d92413c94aefb9ca10150dfcd7dd HTTP
 Content-Type: application/json
 
 {
-  "startAtDate": "2024-05-04",
-  "startAtTime": "00:00:00",
-  "endAtDate": "2024-05-03",
-  "endAtTime": "12:41:00",
+  "start_at_date": "2024-05-04",
+  "start_at_time": "00:00:00",
+  "end_at_date": "2024-05-03",
+  "end_at_time": "12:41:00",
   "notes": "Edited"
 }
 
@@ -194,10 +194,10 @@ PUT http://127.0.0.1:5000/api/v1.0/records/b306d92413c94aefb9ca10150dfcd7dd HTTP
 Content-Type: application/json
 
 {
-  "startAtDate": "2024-05-01",
-  "startAtTime": "00:00:00",
-  "endAtDate": "2024-05-03",
-  "endAtTime": "12:41:00",
+  "start_at_date": "2024-05-01",
+  "start_at_time": "00:00:00",
+  "end_at_date": "2024-05-03",
+  "end_at_time": "12:41:00",
   "notes": "Edited"
 }
 

@@ -14,14 +14,18 @@ TimeRecordRequestSwaggerModel = api.model(
         "task_id": fields.String(
             description="The task´s ID",
         ),
-        "startAtDate": fields.DateTime(
+        "start_at_date": fields.DateTime(
             description="The date on which the record started"
         ),
-        "startAtTime": fields.DateTime(
+        "start_at_time": fields.DateTime(
             description="The time at which the record started"
         ),
-        "endAtDate": fields.DateTime(description="The date on which the record ended"),
-        "endAtTime": fields.DateTime(description="The time at which the record ended"),
+        "end_at_date": fields.DateTime(
+            description="The date on which the record ended"
+        ),
+        "end_at_time": fields.DateTime(
+            description="The time at which the record ended"
+        ),
         "created_at": fields.DateTime(
             description="The date and time of creation of the record"
         ),
@@ -42,26 +46,28 @@ TimeRecordResponseSwaggerModel = api.model(
         "task_id": fields.String(
             description="The task´s ID",
         ),
-        "startAtDate": fields.DateTime(
+        "start_at_date": fields.DateTime(
             description="The date on which the record started"
         ),
-        "startAtHourTime": fields.Integer(
+        "start_at_hour_time": fields.Integer(
             description="The hour of the time at which the record started"
         ),
-        "startAtMinuteTime": fields.Integer(
+        "start_at_minute_time": fields.Integer(
             description="The minute of the time at which the record started"
         ),
-        "startAtSecondTime": fields.Integer(
+        "start_at_second_time": fields.Integer(
             description="The second of the time at which the record started"
         ),
-        "endAtDate": fields.DateTime(description="The date on which the record ended"),
-        "endAtHourTime": fields.Integer(
+        "end_at_date": fields.DateTime(
+            description="The date on which the record ended"
+        ),
+        "end_at_hour_time": fields.Integer(
             description="The hour of the time at which the record ended"
         ),
-        "endAtMinuteTime": fields.Integer(
+        "end_at_minute_time": fields.Integer(
             description="The minute of the time at which the record ended"
         ),
-        "endAtSecondTime": fields.Integer(
+        "end_at_second_time": fields.Integer(
             description="The second of the time at which the record ended"
         ),
         "created_at": fields.DateTime(
@@ -108,20 +114,20 @@ class TimeRecordBaseDto:
 
 
 class TimeRecordEndDto(TimeRecordBaseDto):
-    endAtDate: datetime | None
-    endAtTime: str | None
+    end_at_date: datetime | None
+    end_at_time: str | None
 
     def __init__(
         self,
         notes: str | None,
         task_id: str | None,
         project_id: str | None,
-        endAtDate: datetime | None,
-        endAtTime: str | None,
+        end_at_date: datetime | None,
+        end_at_time: str | None,
     ):
         super().__init__(None, notes, task_id, project_id)
-        self.endAtDate = endAtDate
-        self.endAtTime = endAtTime
+        self.end_at_date = end_at_date
+        self.end_at_time = end_at_time
 
     def __init__(
         self,
@@ -129,16 +135,16 @@ class TimeRecordEndDto(TimeRecordBaseDto):
         notes: str | None,
         task_id: str | None,
         project_id: str | None,
-        endAtDate: datetime | None,
-        endAtTime: str | None,
+        end_at_date: datetime | None,
+        end_at_time: str | None,
     ):
         super().__init__(id, notes, task_id, project_id)
-        self.endAtDate = endAtDate
-        self.endAtTime = endAtTime
+        self.end_at_date = end_at_date
+        self.end_at_time = end_at_time
 
     def parseJson(raw: any, theId: str | None = None):
-        endAtDate = raw.get("endAtDate")
-        endAtTime = raw.get("endAtTime")
+        end_at_date = raw.get("end_at_date")
+        end_at_time = raw.get("end_at_time")
         notes = raw.get("notes")
         task_id = raw.get("task_id")
         project_id = raw.get("project_id")
@@ -148,14 +154,14 @@ class TimeRecordEndDto(TimeRecordBaseDto):
             notes,
             task_id,
             project_id,
-            endAtDate,
-            endAtTime,
+            end_at_date,
+            end_at_time,
         )
 
 
 class TimeRecordStartDto(TimeRecordBaseDto):
-    startAtDate: datetime | None
-    startAtTime: str | None
+    start_at_date: datetime | None
+    start_at_time: str | None
 
     def __init__(
         self,
@@ -163,16 +169,16 @@ class TimeRecordStartDto(TimeRecordBaseDto):
         task_id: str | None,
         project_id: str | None,
         notes: str | None,
-        startAtDate: datetime | None,
-        startAtTime: str | None,
+        start_at_date: datetime | None,
+        start_at_time: str | None,
     ):
         super().__init__(id, task_id, project_id, notes)
-        self.startAtDate = startAtDate
-        self.startAtTime = startAtTime
+        self.start_at_date = start_at_date
+        self.start_at_time = start_at_time
 
     def parseJson(raw: any, theId: str | None = None):
-        startAtDate = raw.get("startAtDate")
-        startAtTime = raw.get("startAtTime")
+        start_at_date = raw.get("start_at_date")
+        start_at_time = raw.get("start_at_time")
         notes = raw.get("notes")
         task_id = raw.get("taskId")
         project_id = raw.get("projectId")
@@ -182,6 +188,6 @@ class TimeRecordStartDto(TimeRecordBaseDto):
             task_id,
             project_id,
             notes,
-            startAtDate,
-            startAtTime,
+            start_at_date,
+            start_at_time,
         )

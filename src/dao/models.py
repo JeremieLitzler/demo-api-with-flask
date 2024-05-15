@@ -101,16 +101,16 @@ class Task(Model):
 class TimeRecord(Model):
     __tablename__ = "boosted_web_time_record"
     id: Mapped[str] = mapped_column(primary_key=True)
-    startAtHourTime: Mapped[int]
-    startAtMinuteTime: Mapped[int]
-    startAtSecondTime: Mapped[int]
-    startAtDate: Mapped[datetime] = mapped_column(
+    start_at_hour_time: Mapped[int]
+    start_at_minute_time: Mapped[int]
+    start_at_second_time: Mapped[int]
+    start_at_date: Mapped[datetime] = mapped_column(
         doc="The date (year-month-day) the record was started"
     )
-    endAtHourTime: Mapped[int] = mapped_column(init=False, nullable=True)
-    endAtMinuteTime: Mapped[int] = mapped_column(init=False, nullable=True)
-    endAtSecondTime: Mapped[int] = mapped_column(init=False, nullable=True)
-    endAtDate: Mapped[datetime] = mapped_column(
+    end_at_hour_time: Mapped[int] = mapped_column(init=False, nullable=True)
+    end_at_minute_time: Mapped[int] = mapped_column(init=False, nullable=True)
+    end_at_second_time: Mapped[int] = mapped_column(init=False, nullable=True)
+    end_at_date: Mapped[datetime] = mapped_column(
         init=False,
         nullable=True,
         doc="The date (year-month-day) the record was stopped",

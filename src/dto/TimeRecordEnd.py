@@ -4,20 +4,20 @@ from dto.TimeRecordBaseDto import TimeRecordBaseDto
 
 
 class TimeRecordEndDto(TimeRecordBaseDto):
-    endAtDate: datetime | None
-    endAtTime: str | None
+    end_at_date: datetime | None
+    end_at_time: str | None
 
     def __init__(
         self,
         notes: str | None,
         task_id: str | None,
         project_id: str | None,
-        endAtDate: datetime | None,
-        endAtTime: str | None,
+        end_at_date: datetime | None,
+        end_at_time: str | None,
     ):
         super().__init__(None, notes, task_id, project_id)
-        self.endAtDate = endAtDate
-        self.endAtTime = endAtTime
+        self.end_at_date = end_at_date
+        self.end_at_time = end_at_time
 
     def __init__(
         self,
@@ -25,16 +25,16 @@ class TimeRecordEndDto(TimeRecordBaseDto):
         notes: str | None,
         task_id: str | None,
         project_id: str | None,
-        endAtDate: datetime | None,
-        endAtTime: str | None,
+        end_at_date: datetime | None,
+        end_at_time: str | None,
     ):
         super().__init__(id, notes, task_id, project_id)
-        self.endAtDate = endAtDate
-        self.endAtTime = endAtTime
+        self.end_at_date = end_at_date
+        self.end_at_time = end_at_time
 
     def parseJson(raw: any, theId: str | None = None):
-        endAtDate = raw.get("endAtDate")
-        endAtTime = raw.get("endAtTime")
+        end_at_date = raw.get("end_at_date")
+        end_at_time = raw.get("end_at_time")
         notes = raw.get("notes")
         task_id = raw.get("task_id")
         project_id = raw.get("project_id")
@@ -44,6 +44,6 @@ class TimeRecordEndDto(TimeRecordBaseDto):
             notes,
             task_id,
             project_id,
-            endAtDate,
-            endAtTime,
+            end_at_date,
+            end_at_time,
         )

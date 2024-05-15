@@ -730,7 +730,7 @@
         "kind": 6,
         "importPath": "src.dal.models",
         "description": "src.dal.models",
-        "peekOfCode": "class TimeRecord(Model):\n    __tablename__ = \"boosted_web_time_record\"\n    startAtHourTime: Mapped[int]\n    startAtMinuteTime: Mapped[int]\n    startAtSecondTime: Mapped[int]\n    startAtDate: Mapped[datetime] = mapped_column(\n        doc=\"The date (year-month-day) the record was started\"\n    )\n    endAtHourTime: Mapped[int]\n    endAtMinuteTime: Mapped[int]",
+        "peekOfCode": "class TimeRecord(Model):\n    __tablename__ = \"boosted_web_time_record\"\n    start_at_hour_time: Mapped[int]\n    start_at_minute_time: Mapped[int]\n    start_at_second_time: Mapped[int]\n    start_at_date: Mapped[datetime] = mapped_column(\n        doc=\"The date (year-month-day) the record was started\"\n    )\n    end_at_hour_time: Mapped[int]\n    end_at_minute_time: Mapped[int]",
         "detail": "src.dal.models",
         "documentation": {}
     },

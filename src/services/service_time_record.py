@@ -23,19 +23,19 @@ from utils.parsers import extract_time_values, convert_str_date, convert_str_dat
 
 
 def validate_creation_data(data: TimeRecordStartDto, checkParent=True):
-    if data.startAtDate is None:
+    if data.start_at_date is None:
         raise_business_error(data.id, False, "start date is required", 422)
 
-    result = validate_date_format(data.startAtDate)
+    result = validate_date_format(data.start_at_date)
     if result is False:
         raise_business_error(
             data.id, False, "start date is not format in YYYY-MM-DD", 422
         )
 
-    if data.startAtTime is None:
+    if data.start_at_time is None:
         raise_business_error(data.id, False, "start time is required", 422)
 
-    result = validate_time_format(data.startAtTime)
+    result = validate_time_format(data.start_at_time)
     if result is False:
         raise_business_error(
             data.id, False, "start time is not format in HH:mm:ss", 422
@@ -70,35 +70,35 @@ def validate_creation_data(data: TimeRecordStartDto, checkParent=True):
 
 
 def validate_stopping_data(data: TimeRecordEndDto):
-    if data.endAtDate is None:
+    if data.end_at_date is None:
         raise_business_error(data.id, False, "end date is required", 422)
 
-    result = validate_date_format(data.endAtDate)
+    result = validate_date_format(data.end_at_date)
     if result is False:
         raise_business_error(
             data.id, False, "end date is not format in YYYY-MM-DD", 422
         )
 
-    if data.endAtTime is None:
+    if data.end_at_time is None:
         raise_business_error(data.id, False, "end time is required", 422)
 
-    result = validate_time_format(data.endAtTime)
+    result = validate_time_format(data.end_at_time)
     if result is False:
         raise_business_error(data.id, False, "end time is not format in HH:mm:ss", 422)
 
 
 def extract_start_time_values(dto: TimeRecordStartDto, record: TimeRecord):
-    start_hours, start_minutes, start_seconds = extract_time_values(dto.startAtTime)
-    record.startAtHourTime = start_hours
-    record.startAtMinuteTime = start_minutes
-    record.startAtSecondTime = start_seconds
+    start_hours, start_minutes, start_seconds = extract_time_values(dto.start_at_time)
+    record.start_at_hour_time = start_hours
+    record.start_at_minute_time = start_minutes
+    record.start_at_second_time = start_seconds
 
 
 def extract_end_time_values(dto: TimeRecordEndDto, record: TimeRecord):
-    end_hours, end_minutes, end_seconds = extract_time_values(dto.endAtTime)
-    record.endAtHourTime = end_hours
-    record.endAtMinuteTime = end_minutes
-    record.endAtSecondTime = end_seconds
+    end_hours, end_minutes, end_seconds = extract_time_values(dto.end_at_time)
+    record.end_at_hour_time = end_hours
+    record.end_at_minute_time = end_minutes
+    record.end_at_second_time = end_seconds
 
 
 def sanitize_id(id: str):
@@ -111,7 +111,7 @@ def start(jsonData: dict) -> None:
         validate_creation_data(data)
         # TODO: Feat > automap the Dto to Model
         new_record = TimeRecord()
-        new_record.startAtDate = convert_str_date(data.startAtDate)
+        new_record.start_at_date = convert_str_date(data.start_at_date)
         new_record.task_id = data.task_id
         new_record.project_id = data.project_id
         extract_start_time_values(data, new_record)
@@ -177,9 +177,9 @@ def end_strickly_greater_than_start(
     startDto: TimeRecordStartDto, endDto: TimeRecordEndDto
 ):
     fullStartDate = convert_str_datetime(
-        f"{startDto.startAtDate} {startDto.startAtTime}"
+        f"{startDto.start_at_date} {startDto.start_at_time}"
     )
-    fullEndDate = convert_str_datetime(f"{endDto.endAtDate} {endDto.endAtTime}")
+    fullEndDate = convert_str_datetime(f"{endDto.end_at_date} {endDto.end_at_time}")
 
     if fullStartDate > fullEndDate:
         raise_business_error(
@@ -212,9 +212,9 @@ def update_one(id: str, jsonData: dict):
         if result is not None:
             return result
 
-        record.startAtDate = convert_str_date(startDto.startAtDate)
+        record.start_at_date = convert_str_date(startDto.start_at_date)
         extract_start_time_values(startDto, record)
-        record.endAtDate = convert_str_date(endDto.endAtDate)
+        record.end_at_date = convert_str_date(endDto.end_at_date)
         extract_end_time_values(endDto, record)
         if notes is not None:
             record.notes = notes.strip()
@@ -241,7 +241,7 @@ def stop(id: str, jsonData: dict) -> None:
         if result is not None:
             return result
 
-        record.endAtDate = convert_str_date(data.endAtDate)
+        record.end_at_date = convert_str_date(data.end_at_date)
         extract_end_time_values(data, record)
 
         dal_time_record.save()
