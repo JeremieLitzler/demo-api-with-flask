@@ -3,11 +3,10 @@ from dto.TimePart import TimePartDto
 from api_swagger import api
 from flask_restx import fields
 
-TimeRecordRequestSwaggerModel = api.model(
-    "TimeRecord",
+RecordStartRequestSwaggerModel = api.model(
+    "RecordStartRequest",
     {
-        "id": fields.String(readonly=True, description="The record unique identifier"),
-        "notes": fields.String(description="The record´s name"),
+        "notes": fields.String(description="The record´s notes"),
         "project_id": fields.String(
             description="The project´s ID",
         ),
@@ -15,31 +14,69 @@ TimeRecordRequestSwaggerModel = api.model(
             description="The task´s ID",
         ),
         "start_at_date": fields.DateTime(
-            description="The date on which the record started"
+            description="The date on which the record started. Format expected to be a valid (e.g. 2024-05-15)."
         ),
         "start_at_time": fields.DateTime(
-            description="The time at which the record started"
-        ),
-        "end_at_date": fields.DateTime(
-            description="The date on which the record ended"
-        ),
-        "end_at_time": fields.DateTime(
-            description="The time at which the record ended"
-        ),
-        "created_at": fields.DateTime(
-            description="The date and time of creation of the record"
-        ),
-        "updated_at": fields.DateTime(
-            description="The date and time of last record´s update"
+            description="The time at which the record started. Format expected to be a valid (e.g. 18:00:00)."
         ),
     },
 )
-
-TimeRecordResponseSwaggerModel = api.model(
-    "TimeRecord",
+RecordStopRequestSwaggerModel = api.model(
+    "RecordStopRequest",
+    {
+        "id": fields.String(readonly=True, description="The record unique identifier"),
+        "notes": fields.String(description="The record´s notes"),
+        "project_id": fields.String(
+            description="The project´s ID",
+        ),
+        "task_id": fields.String(
+            description="The task´s ID",
+        ),
+        "end_at_date": fields.DateTime(
+            description="The date on which the record ended. Format expected to be a valid (e.g. 2024-05-15)."
+        ),
+        "end_at_time": fields.DateTime(
+            description="The time at which the record ended. Format expected to be a valid (e.g. 18:00:00)."
+        ),
+    },
+)
+RecordUpdateRequestSwaggerModel = api.model(
+    "RecordUpdateRequest",
+    {
+        "id": fields.String(readonly=True, description="The record unique identifier"),
+        "notes": fields.String(description="The record´s notes"),
+        "project_id": fields.String(
+            description="The project´s ID",
+        ),
+        "task_id": fields.String(
+            description="The task´s ID",
+        ),
+        "start_at_date": fields.DateTime(
+            description="The date on which the record started. Format expected to be a valid (e.g. 2024-05-15)."
+        ),
+        "start_at_time": fields.DateTime(
+            description="The time at which the record started. Format expected to be a valid (e.g. 18:00:00)."
+        ),
+        "end_at_date": fields.DateTime(
+            description="The date on which the record ended. Format expected to be a valid (e.g. 2024-05-15)."
+        ),
+        "end_at_time": fields.DateTime(
+            description="The time at which the record ended. Format expected to be a valid (e.g. 18:00:00)."
+        ),
+    },
+)
+RecordNotesRequestSwaggerModel = api.model(
+    "RecordNotesRequest",
+    {
+        "id": fields.String(readonly=True, description="The record unique identifier"),
+        "notes": fields.String(description="The record´s notes"),
+    },
+)
+RecordResponseSwaggerModel = api.model(
+    "RecordResponse",
     {
         "id": fields.String(description="The record unique identifier"),
-        "notes": fields.String(description="The record´s name"),
+        "notes": fields.String(description="The record´s notes"),
         "project_id": fields.String(
             description="The project´s ID",
         ),

@@ -2,8 +2,23 @@ from datetime import datetime
 from api_swagger import api
 from flask_restx import fields
 
-TaskSwaggerModel = api.model(
-    "Task",
+TaskRequestSwaggerModel = api.model(
+    "TaskRequest",
+    {
+        "name": fields.String(required=True, description="The task´s name"),
+        "project_id": fields.String(
+            required=True,
+            description="The project´s ID",
+        ),
+        "completed": fields.Boolean(
+            default=False,
+            description="Flag indicating if the task is completed or not.",
+        ),
+    },
+)
+
+TaskResponseSwaggerModel = api.model(
+    "TaskResponse",
     {
         "id": fields.String(readonly=True, description="The project unique identifier"),
         "name": fields.String(required=True, description="The task´s name"),

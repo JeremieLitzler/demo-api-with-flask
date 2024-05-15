@@ -2,8 +2,23 @@ from datetime import datetime
 from api_swagger import api
 from flask_restx import fields
 
-ProjectSwaggerModel = api.model(
-    "Project",
+ProjectRequestSwaggerModel = api.model(
+    "ProjectRequest",
+    {
+        "name": fields.String(required=True, description="The project´s name"),
+        "color": fields.String(
+            required=True,
+            description='The project´s color code (HTML Hexadecimal code starting with "#")',
+        ),
+        "is_archived": fields.Boolean(
+            default=False,
+            description="Flag indicating if the project is archived or not.",
+        ),
+    },
+)
+
+ProjectResponseSwaggerModel = api.model(
+    "ProjectResponse",
     {
         "id": fields.String(readonly=True, description="The project unique identifier"),
         "name": fields.String(required=True, description="The project´s name"),

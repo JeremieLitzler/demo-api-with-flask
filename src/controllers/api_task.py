@@ -5,8 +5,8 @@ import json
 from api_swagger import api
 from services.service_task import *
 from services.service_time_record import get_by_task
-from dto.Task import TaskDto, TaskSwaggerModel
-from dto.TimeRecord import TimeRecordResponseSwaggerModel
+from dto.Task import TaskDto, TaskRequestSwaggerModel, TaskResponseSwaggerModel
+from dto.TimeRecord import RecordResponseSwaggerModel
 
 ns = api.namespace("api/v1.0/tasks", description="Task operations")
 
@@ -14,15 +14,16 @@ ns = api.namespace("api/v1.0/tasks", description="Task operations")
 @ns.route("/")
 class TaskList(Resource):
     @ns.doc("api_task_add")
-    @ns.expect(TaskSwaggerModel)
-    @ns.marshal_with(TaskSwaggerModel, code=201)
+    @ns.expect(TaskRequestSwaggerModel)
+    @ns.marshal_with(TaskResponseSwaggerModel, code=201)
+    @ns.response(422, "Payload is invalid. See details in response.")
     def post(self):
         """Create a new task"""
         response = create(api.payload)
         return response
 
     @ns.doc("api_task_get_all")
-    @ns.marshal_with(TaskSwaggerModel)
+    @ns.marshal_with(TaskResponseSwaggerModel)
     def get(self):
         """List all the tasks"""
         tasks = get_all()
@@ -33,28 +34,27 @@ class TaskList(Resource):
 @ns.response(404, "Task not found")
 @ns.param("id", "The task identifier")
 class Task(Resource):
-    """Retrieve a single task"""
 
     @ns.doc("api_task_get_one")
-    @ns.marshal_with(TaskSwaggerModel)
+    @ns.marshal_with(TaskResponseSwaggerModel)
     def get(self, id):
+        """Retrieve a single task"""
         response = get_one(id)
         return response
 
-    """Update a task"""
-
     @ns.doc("api_task_update")
-    @ns.marshal_with(TaskSwaggerModel)
+    @ns.expect(TaskRequestSwaggerModel)
+    @ns.marshal_with(TaskResponseSwaggerModel)
+    @ns.response(422, "Payload is invalid. See details in response.")
     def put(self, id):
-        # Logic to update a specific task by ID
+        """Update a task"""
         response = update_one(id, api.payload)
         return response
-
-    """Delete a task"""
 
     @ns.doc("api_task_delete")
     @ns.response(204, "Task deleted")
     def delete(self, id):
+        """Delete a task"""
         response = delete_one(id)
         return response
 
@@ -64,7 +64,7 @@ class Task(Resource):
 @ns.param("id", "The task identifier")
 class TaskRecords(Resource):
     @ns.doc("api_task_get_records")
-    @ns.marshal_with(TimeRecordResponseSwaggerModel)
+    @ns.marshal_with(RecordResponseSwaggerModel)
     def get(self, id):
         """List all records of the task"""
         records = get_by_task(id)
