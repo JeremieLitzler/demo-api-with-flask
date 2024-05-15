@@ -26,9 +26,9 @@ def validate(data: ProjectDto):
         raise_business_error(id, False, "Color is empty", 422)
 
 
-def add(data: dict) -> None:
+def add(jsonData: dict) -> None:
     try:
-        project_data = ProjectDto.parseJson(data)
+        project_data = ProjectDto.parseJson(jsonData)
         # TODO: Feat > automap the Dto to Model
         validate(project_data)
         new_project = Project(name=project_data.name, color=project_data.color)
@@ -46,6 +46,8 @@ def get_one(id: str, noJson=False) -> ProjectDto:
         project = dal_project.fetch_one(id)
         if noJson:
             return project
+        if project is None:
+            return raise_business_error(id, False, "Project not found", 404)
 
         return project
     except Exception as ex:
@@ -66,12 +68,13 @@ def get_all() -> list[ProjectDto]:
         print("finished calling get_projects")
 
 
-def update_one(project_data: ProjectDto) -> None:
+def update_one(id: str, jsonData: dict) -> None:
     try:
-        project = dal_project.fetch_one(project_data.id)
+        project = dal_project.fetch_one(id)
         if project == None:
-            return get_response_json(id, False, "Project not found", 404)
+            return raise_business_error(id, False, "Project not found", 404)
 
+        project_data = ProjectDto.parseJson(jsonData, id)
         if project_data.name is not None:
             project.name = project_data.name
         if project_data.color is not None:

@@ -47,7 +47,7 @@ class Project(Resource):
     @ns.marshal_with(project)
     def put(self, id):
         # Logic to update a specific project by ID
-        response = update_one(ProjectDto.parseJson(api.payload, id))
+        response = update_one(id, api.payload)
         return response
 
     """Delete a project"""
