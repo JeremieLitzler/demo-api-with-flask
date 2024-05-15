@@ -7,54 +7,51 @@ import json
 from sqlalchemy.orm import scoped_session
 
 from app import app
-from utils.api_utils import get_response_json
-from dto.TaskDto import TaskDto
+from utils.api_utils import get_response_json, raise_business_error, handle_ex
+import services.service_project as service_project
+from dto.Task import TaskDto
 from dao.models import Task
 import dal.dal_task as dal_task
-import services.service_project as service_project
 
 
 def validate(data: TaskDto, checkProject=True):
     if data.name == None:
-        return get_response_json(None, False, "Task name is required", 422)
+        raise_business_error(None, False, "Task name is required", 422)
     if data.name.strip() == "":
-        return get_response_json(None, False, "Task name is empty", 422)
+        raise_business_error(None, False, "Task name is empty", 422)
 
     if checkProject == False:
-        return
+        return None
 
     if data.project_id == None:
-        return get_response_json(None, False, "Project is required", 422)
+        raise_business_error(None, False, "Project is required", 422)
     if data.project_id.strip() == "":
-        return get_response_json(None, False, "Project is empty", 422)
+        raise_business_error(None, False, "Project is empty", 422)
 
     project = service_project.get_one(data.project_id, True)
     if project == None:
-        return get_response_json(None, False, "Project doesn't exist", 422)
+        raise_business_error(None, False, "Project doesn't exist", 422)
 
     return None
 
 
-def create(data: TaskDto) -> None:
-
+def create(jsonData: dict) -> None:
+    data = TaskDto.parseJson(jsonData)
     result = validate(data)
     if result != None:
         return result
 
     try:
         # TODO: Feat > automap the Dto to Model
-        newTask = Task()
-        newTask.name = data.name
-        newTask.project_id = data.project_id
+        new_task = Task()
+        new_task.name = data.name
+        new_task.project_id = data.project_id
 
-        dal_task.add(newTask)
-
-        # Return True if at least one row was added
-        message = "null" if True else "No record affected"
-        return get_response_json(newTask.id, True, message, 201)
+        inserted_task = dal_task.add(new_task)
+        return inserted_task, 201
     except Exception as ex:
         print(ex)
-        return get_response_json(id, False, ex)
+        handle_ex(ex)
     finally:
         print("finished calling service_task.create")
 
@@ -65,13 +62,15 @@ def get_one(id: str, noJson=False) -> TaskDto:
 
     try:
         task = dal_task.fetch_one(id)
-        if task == None:
-            return get_response_json(id, False, "Task not found", 404)
-        else:
-            return jsonify(task)
+        if noJson:
+            return project
+        if task is None:
+            return raise_business_error(id, False, "Task not found", 404)
+
+        return task
     except Exception as ex:
         print(ex)
-        return get_response_json(id, False, ex, 500)
+        handle_ex(ex)
     finally:
         print("finished calling service_task.get_one")
 
@@ -79,23 +78,25 @@ def get_one(id: str, noJson=False) -> TaskDto:
 def get_all() -> list[TaskDto]:
     try:
         tasks = dal_task.fetch_all()
-        return jsonify(tasks)
+        return tasks
     except Exception as ex:
         print(ex)
-        return get_response_json(id, False, ex)
+        handle_ex(ex)
     finally:
         print("finished calling service_task.get_all")
 
 
 # TODO > Feat: how do you notify the client that the project_id cannot be
 #              changed? http 400 if Dto contains the attribute?
-def update(data: TaskDto) -> None:
+def update_one(id: str, jsonData: dict) -> None:
     try:
-        task = dal_task.fetch_one(data.id)
+        task = dal_task.fetch_one(id)
         if task == None:
-            return get_response_json(id, False, "Task not found", 404)
+            return raise_business_error(id, False, "Task not found", 404)
 
         # TODO > Feat : check name not already taken
+
+        data = TaskDto.parseJson(jsonData, id)
 
         if data.name is not None and data.name.strip() != "":
             task.name = data.name
@@ -104,25 +105,24 @@ def update(data: TaskDto) -> None:
 
         dal_task.save()
 
-        return jsonify(task)
+        return task
     except Exception as ex:
         print(ex)
-        return get_response_json(id, False, ex)
+        handle_ex(ex)
     finally:
         print("finished calling service_task.update")
 
 
 # TODO > Feat: cannot delete a task if records exist for the task
-def delete(id: str) -> bool:
+def delete_one(id: str):
     if id.strip() == "":
         return get_response_json(id, False, "ID is required", 422)
 
     try:
         result = dal_task.delete(id)
-        message = "Task deleted successfully" if result else "No record affected"
-        return get_response_json(id, True, message, 204)
+        return "", 204
     except Exception as ex:
         print(ex)
-        return get_response_json(id, False, ex)
+        handle_ex(ex)
     finally:
         print("finished calling service_task.delete")

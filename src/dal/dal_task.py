@@ -22,6 +22,8 @@ def add(task: Task):
     session_db.add(task)
     save()
     print(f"Inserted {task.name} to the DB")
+    session_db.refresh(task)
+    return task
 
 
 # Get all the tasks

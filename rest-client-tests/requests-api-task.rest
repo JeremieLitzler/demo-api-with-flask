@@ -1,4 +1,4 @@
-### HTTP 400 > No JSON data
+### HTTP 422 > No JSON data
 POST http://127.0.0.1:5000/api/v1.0/tasks HTTP/1.1
 Content-Type: application/json
 
@@ -50,25 +50,23 @@ Content-Type: application/json
 
 {
   "name": "New api/v1.0/task",
-  "project_id": "fd8f1cd8e2c3457bba7ffce85437f8e4"
+  "project_id": "cff9923fc6044e6f81e227ef67ceeb89"
 }
-
-### Retrieve non existing record
-GET http://127.0.0.1:5000/api/v1.0/tasks/not_exist HTTP/1.1
-content-type: application/json
-
-
-### Retrieve existing record
-GET http://127.0.0.1:5000/api/v1.0/tasks/de5f916db0a84a70879c87af987cf8d7 HTTP/1.1
-content-type: application/json
-
 
 ### Retrieve all records
 GET http://127.0.0.1:5000/api/v1.0/tasks HTTP/1.1
 content-type: application/json
 
+### Retrieve non existing record
+GET http://127.0.0.1:5000/api/v1.0/tasks/not_exist HTTP/1.1
+content-type: application/json
+
+### Retrieve existing record
+GET http://127.0.0.1:5000/api/v1.0/tasks/477f3b7c808a4490a3cbced315ae2966 HTTP/1.1
+content-type: application/json
+
 ### Doesn't update name if empty 
-PUT http://127.0.0.1:5000/api/v1.0/tasks/de5f916db0a84a70879c87af987cf8d7 HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/tasks/477f3b7c808a4490a3cbced315ae2966 HTTP/1.1
 content-type: application/json
 
 {
@@ -76,7 +74,7 @@ content-type: application/json
 }
 
 ### Update task
-PUT http://127.0.0.1:5000/api/v1.0/tasks/de5f916db0a84a70879c87af987cf8d7 HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/tasks/477f3b7c808a4490a3cbced315ae2966 HTTP/1.1
 content-type: application/json
 
 {
@@ -84,7 +82,7 @@ content-type: application/json
 }
 
 ### Set task to completed
-PUT http://127.0.0.1:5000/api/v1.0/tasks/de5f916db0a84a70879c87af987cf8d7 HTTP/1.1
+PUT http://127.0.0.1:5000/api/v1.0/tasks/477f3b7c808a4490a3cbced315ae2966 HTTP/1.1
 content-type: application/json
 
 {
@@ -92,5 +90,5 @@ content-type: application/json
 }
 
 ### Delete task
-DELETE http://127.0.0.1:5000/api/v1.0/tasks/de5f916db0a84a70879c87af987cf8d7 HTTP/1.1
+DELETE http://127.0.0.1:5000/api/v1.0/tasks/477f3b7c808a4490a3cbced315ae2966 HTTP/1.1
 content-type: application/json

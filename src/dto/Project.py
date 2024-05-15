@@ -2,7 +2,7 @@ from datetime import datetime
 from api_swagger import api
 from flask_restx import fields
 
-project = api.model(
+ProjectSwaggerModel = api.model(
     "Project",
     {
         "id": fields.String(readonly=True, description="The project unique identifier"),

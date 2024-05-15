@@ -1,4 +1,28 @@
 from datetime import datetime
+from api_swagger import api
+from flask_restx import fields
+
+TaskSwaggerModel = api.model(
+    "Task",
+    {
+        "id": fields.String(readonly=True, description="The project unique identifier"),
+        "name": fields.String(required=True, description="The task´s name"),
+        "project_id": fields.String(
+            required=True,
+            description="The project´s ID",
+        ),
+        "completed": fields.Boolean(
+            default=False,
+            description="Flag indicating if the task is completed or not.",
+        ),
+        "created_at": fields.DateTime(
+            description="The date and time of creation of the project"
+        ),
+        "updated_at": fields.DateTime(
+            description="The date and time of last project´s update"
+        ),
+    },
+)
 
 
 class TaskDto:

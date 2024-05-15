@@ -10,7 +10,7 @@ from sqlalchemy.orm import scoped_session
 
 from app import app
 from utils.api_utils import get_response_json, raise_business_error, handle_ex
-from dto.ProjectDto import ProjectDto
+from dto.Project import ProjectDto
 from dao.models import Project
 import dal.dal_project as dal_project
 
@@ -42,6 +42,9 @@ def add(jsonData: dict) -> None:
 
 
 def get_one(id: str, noJson=False) -> ProjectDto:
+    if id.strip() == "":
+        return get_response_json(id, False, "ID is required", 422)
+
     try:
         project = dal_project.fetch_one(id)
         if noJson:
@@ -89,7 +92,10 @@ def update_one(id: str, jsonData: dict) -> None:
         print("finished calling update_project")
 
 
-def delete_one(id: str) -> bool:
+def delete_one(id: str):
+    if id.strip() == "":
+        return get_response_json(id, False, "ID is required", 422)
+
     try:
         result = dal_project.delete(id)
         return "", 204
