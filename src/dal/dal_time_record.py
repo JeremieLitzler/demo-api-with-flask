@@ -22,6 +22,8 @@ def add(record: TimeRecord):
     session_db.add(record)
     save()
     print(f"Inserted {record.id} to the DB")
+    session_db.refresh(record)
+    return record
 
 
 # Get record or records by colum

@@ -7,7 +7,7 @@ import json
 from sqlalchemy.orm import scoped_session
 
 from app import app
-from utils.api_utils import get_response_json, raise_business_error, handle_ex
+from utils.api_utils import raise_business_error, handle_ex
 import services.service_project as service_project
 from dto.Task import TaskDto
 from dao.models import Task
@@ -58,14 +58,14 @@ def create(jsonData: dict) -> None:
 
 def get_one(id: str, noJson=False) -> TaskDto:
     if id.strip() == "":
-        return get_response_json(id, False, "ID is required", 422)
+        raise_business_error(id, False, "ID is required", 422)
 
     try:
         task = dal_task.fetch_one(id)
         if noJson:
-            return project
+            return task
         if task is None:
-            return raise_business_error(id, False, "Task not found", 404)
+            raise_business_error(id, False, "Task not found", 404)
 
         return task
     except Exception as ex:
@@ -92,7 +92,7 @@ def update_one(id: str, jsonData: dict) -> None:
     try:
         task = dal_task.fetch_one(id)
         if task == None:
-            return raise_business_error(id, False, "Task not found", 404)
+            raise_business_error(id, False, "Task not found", 404)
 
         # TODO > Feat : check name not already taken
 
@@ -116,7 +116,7 @@ def update_one(id: str, jsonData: dict) -> None:
 # TODO > Feat: cannot delete a task if records exist for the task
 def delete_one(id: str):
     if id.strip() == "":
-        return get_response_json(id, False, "ID is required", 422)
+        raise_business_error(id, False, "ID is required", 422)
 
     try:
         result = dal_task.delete(id)

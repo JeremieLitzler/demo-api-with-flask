@@ -1,63 +1,87 @@
 from flask import request, jsonify
+from flask_restx import Resource, fields
 import json
 
-from app import app
+from api_swagger import api
 from services.service_time_record import *
-from dto.TimeRecordStartDto import TimeRecordStartDto
-from dto.TimeRecordEndDto import TimeRecordEndDto
+from dto.TimeRecord import (
+    TimeRecordStartDto,
+    TimeRecordEndDto,
+    TimeRecordRequestSwaggerModel,
+    TimeRecordResponseSwaggerModel,
+)
+
+ns = api.namespace("api/v1.0/records", description="Time record operations")
 
 
-@app.route("/api/v1.0/records", methods=["POST"])
-def api_record_add():
-    data = request.get_json()
-    if not data:
-        return get_response_json(None, False, "No JSON data", 400)
+@ns.route("/")
+class RecordList(Resource):
+    @ns.doc("api_record_add")
+    @ns.expect(TimeRecordRequestSwaggerModel)
+    @ns.marshal_with(TimeRecordResponseSwaggerModel, code=201)
+    def post(self):
+        """Create a new record"""
+        response = start(api.payload)
+        return response
 
-    dto = TimeRecordStartDto.parseJson(data)
-    response = start(dto)
-    return response
-
-
-@app.route("/api/v1.0/records/<string:id>", methods=["GET"])
-def api_record_get(id: str):
-    response = get_one(id)
-    return response
-
-
-@app.route("/api/v1.0/records/<string:id>/stop", methods=["PUT"])
-def api_record_update_stop(id):
-    data = request.get_json()
-    if not data:
-        return get_response_json(None, False, "No JSON data", 400)
-
-    response = stop(id, TimeRecordEndDto.parseJson(data, id))
-    return response
+    @ns.doc("api_record_get_all")
+    @ns.marshal_with(TimeRecordResponseSwaggerModel)
+    def get(self):
+        """List all the records"""
+        projects = get_all()
+        return projects
 
 
-@app.route("/api/v1.0/records/<string:id>/notes", methods=["PUT"])
-def api_record_update_notes(id):
-    data = request.get_json()
-    if not data:
-        return get_response_json(None, False, "No JSON data", 400)
+@ns.route("/<string:id>")
+@ns.response(404, "Record not found")
+@ns.param("id", "The record identifier")
+class Record(Resource):
+    """Retrieve a single record"""
 
-    response = update_notes(id, data.get("notes"))
-    return response
+    @ns.doc("api_record_get_one")
+    @ns.marshal_with(TimeRecordResponseSwaggerModel)
+    def get(self, id):
+        response = get_one(id)
+        return response
+
+    """Update a record"""
+
+    @ns.doc("api_record_update")
+    @ns.marshal_with(TimeRecordResponseSwaggerModel)
+    def put(self, id):
+        response = update_one(id, api.payload)
+        return response
+
+    """Delete a record"""
+
+    @ns.doc("api_record_delete")
+    @ns.response(204, "Record deleted")
+    def delete(self, id):
+        response = delete_one(id)
+        return response
 
 
-@app.route("/api/v1.0/records/<string:id>", methods=["PUT"])
-def api_record_update(id):
-    data = request.get_json()
-    if not data:
-        return get_response_json(None, False, "No JSON data", 400)
+@ns.route("/<string:id>/stop")
+@ns.response(404, "Record not found")
+@ns.param("id", "The record identifier")
+class RecordStop(Resource):
+    """Stop a record"""
 
-    startDto = TimeRecordStartDto.parseJson(data, id)
-    endDto = TimeRecordEndDto.parseJson(data, id)
-    notes = data.get("notes")
-    response = update(id, startDto, endDto, notes)
-    return response
+    @ns.doc("api_record_stop")
+    @ns.marshal_with(TimeRecordResponseSwaggerModel)
+    def put(self, id):
+        response = stop(id, api.payload)
+        return response
 
 
-@app.route("/api/v1.0/records/<string:id>", methods=["DELETE"])
-def api_record_delete(id):
-    response = delete(id)
-    return response
+@ns.route("/<string:id>/notes")
+@ns.response(404, "Record not found")
+@ns.param("id", "The record identifier")
+class RecordNotes(Resource):
+    """Update a record´s notes"""
+
+    @ns.doc("api_record_notes")
+    @ns.marshal_with(TimeRecordResponseSwaggerModel)
+    def put(self, id):
+        response = update_notes(id, api.payload)
+        return response

@@ -6,6 +6,7 @@ from api_swagger import api
 from services.service_project import *
 from services.service_time_record import get_by_project
 from dto.Project import ProjectDto, ProjectSwaggerModel
+from dto.TimeRecord import TimeRecordResponseSwaggerModel
 
 ns = api.namespace("api/v1.0/projects", description="Project operations")
 
@@ -63,7 +64,7 @@ class Project(Resource):
 @ns.param("id", "The project identifier")
 class ProjectRecords(Resource):
     @ns.doc("api_project_get_records")
-    @ns.marshal_with(ProjectSwaggerModel)
+    @ns.marshal_with(TimeRecordResponseSwaggerModel)
     def get(self, id):
         """List all records of the project"""
         records = get_by_project(id)

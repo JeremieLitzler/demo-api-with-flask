@@ -1,5 +1,6 @@
 from functools import partial
 from datetime import datetime
+from utils.api_utils import handle_ex
 
 
 def validate_required_properties(obj, required_properties):
@@ -59,6 +60,8 @@ def validate_date_format(date_str):
         return date
     except ValueError:
         return False
+    except Exception as ex:
+        handle_ex(ex)
 
 
 def validate_datetime_format(date_str):

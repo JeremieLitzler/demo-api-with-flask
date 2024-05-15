@@ -6,6 +6,7 @@ from api_swagger import api
 from services.service_task import *
 from services.service_time_record import get_by_task
 from dto.Task import TaskDto, TaskSwaggerModel
+from dto.TimeRecord import TimeRecordResponseSwaggerModel
 
 ns = api.namespace("api/v1.0/tasks", description="Task operations")
 
@@ -63,7 +64,7 @@ class Task(Resource):
 @ns.param("id", "The task identifier")
 class TaskRecords(Resource):
     @ns.doc("api_task_get_records")
-    @ns.marshal_with(TaskSwaggerModel)
+    @ns.marshal_with(TimeRecordResponseSwaggerModel)
     def get(self, id):
         """List all records of the task"""
         records = get_by_task(id)
