@@ -58,6 +58,8 @@ def handle_ex(ex: any):
     if hasattr(ex, "code"):
         try:
             httpCode = int(ex.code)
+        except TypeError:
+            httpCode = 500
         except ValueError:
             httpCode = 500
 

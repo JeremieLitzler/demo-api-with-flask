@@ -1,0 +1,72 @@
+### Add a project > Missing project name
+POST http://127.0.0.1:5000/api/v2.0/projects HTTP/1.1
+Content-Type: application/json
+
+{
+  "color": ""
+}
+
+### Add a project > Empty project name
+POST http://127.0.0.1:5000/api/v2.0/projects HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Add a project with no color
+POST http://127.0.0.1:5000/api/v2.0/projects HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Project with no color"
+}
+
+### Add a project with empty color
+POST http://127.0.0.1:5000/api/v2.0/projects HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Project with no color",
+  "color": ""
+}
+
+### Add a valid project
+POST http://127.0.0.1:5000/api/v2.0/projects HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Project 23",
+  "color": "#000000"
+}
+
+### Read all projects
+GET http://127.0.0.1:5000/api/v2.0/projects HTTP/1.1
+content-type: application/json
+
+### Read a project
+GET http://127.0.0.1:5000/api/v2.0/projects/48f0e43f763a415ca0d32604a03ab7d0 HTTP/1.1
+content-type: application/json
+
+###  Update a project name
+PUT http://127.0.0.1:5000/api/v2.0/projects/48f0e43f763a415ca0d32604a03ab7d0 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "New Project edited"
+}
+
+### Update a project name and color
+PUT http://127.0.0.1:5000/api/v2.0/projects/48f0e43f763a415ca0d32604a03ab7d0 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "New Project edited 8",
+  "color": "#fa11ff"
+}
+
+### TODO > Add an endpoint to archive a project
+
+### Delete a project
+DELETE http://127.0.0.1:5000/api/v2.0/projects/48f0e43f763a415ca0d32604a03ab7d0 HTTP/1.1
+content-type: application/json
