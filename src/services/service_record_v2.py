@@ -152,6 +152,16 @@ class RecordService:
         finally:
             print("finished calling service_time_record.get_one")
 
+    def get_all(self) -> list[TimeRecord]:
+        try:
+            records = self._repository.set_model(TimeRecord).fetch_all()
+            return records
+        except Exception as ex:
+            print(ex)
+            handle_ex(ex)
+        finally:
+            print("finished calling get_all")
+
     def get_by_task(self, task_id: str) -> list[TimeRecord]:
         clean_task_id = self.sanitize_id(task_id)
         try:

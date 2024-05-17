@@ -102,6 +102,10 @@ Content-Type: application/json
 GET http://127.0.0.1:5000/api/v2.0/tasks/104030d6925b4633b5b036e2afab918e/records HTTP/1.1
 content-type: application/json
 
+### Read all records
+GET http://127.0.0.1:5000/api/v2.0/records HTTP/1.1
+content-type: application/json
+
 
 ### Read an inexistent record
 GET http://127.0.0.1:5000/api/v2.0/records/not_exist HTTP/1.1
