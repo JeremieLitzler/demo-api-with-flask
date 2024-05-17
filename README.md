@@ -1,6 +1,6 @@
 # demo-api-with-flask
 
-Atempt to build an REST API using Flask
+Atempt to build an REST API using **Flask 3+ and Python 3.12+**
 
 ## Prompt given to Gemini
 
