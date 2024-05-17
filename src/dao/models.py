@@ -29,12 +29,15 @@ class Project(Model):
 
     # BTW: init=False means don't make this column part of the constructor
     id: Mapped[str] = mapped_column(
+        String(32),
         primary_key=True,
         doc="value is UUIDv4 generated in the Python code",
     )
-    name: Mapped[str] = mapped_column(nullable=False, unique=True, index=True)
+    name: Mapped[str] = mapped_column(
+        String(100), nullable=False, unique=True, index=True
+    )
     color: Mapped[str] = mapped_column(
-        nullable=False, doc="The HTML color code (e.g. #000000)"
+        String(7), nullable=False, doc="The HTML color code (e.g. #000000)"
     )
     # Use func.now from sqlalchemy and server_default otherwise the timestamp
     # will be off
@@ -65,11 +68,11 @@ class Project(Model):
 @dataclass
 class Task(Model):
     __tablename__ = "boosted_web_task"
-    id: Mapped[str] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(nullable=False)
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
     completed: Mapped[bool] = mapped_column(nullable=True)
     project_id: Mapped[str] = mapped_column(
-        ForeignKey("boosted_web_project.id", ondelete="CASCADE")
+        String(32), ForeignKey("boosted_web_project.id", ondelete="CASCADE")
     )
     # Use func.now from sqlalchemy and server_default otherwise the timestamp
     # will be off
@@ -100,7 +103,7 @@ class Task(Model):
 @dataclass
 class TimeRecord(Model):
     __tablename__ = "boosted_web_time_record"
-    id: Mapped[str] = mapped_column(primary_key=True)
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
     start_at_hour_time: Mapped[int]
     start_at_minute_time: Mapped[int]
     start_at_second_time: Mapped[int]
@@ -115,12 +118,14 @@ class TimeRecord(Model):
         nullable=True,
         doc="The date (year-month-day) the record was stopped",
     )
-    notes: Mapped[str] = mapped_column(init=False, nullable=True)
+    notes: Mapped[str] = mapped_column(String(4000), init=False, nullable=True)
     project_id: Mapped[str] = mapped_column(
-        ForeignKey("boosted_web_project.id", ondelete="CASCADE"), nullable=True
+        String(32),
+        ForeignKey("boosted_web_project.id", ondelete="CASCADE"),
+        nullable=True,
     )
     task_id: Mapped[str] = mapped_column(
-        ForeignKey("boosted_web_task.id", ondelete="CASCADE"), nullable=True
+        String(32), ForeignKey("boosted_web_task.id", ondelete="CASCADE"), nullable=True
     )
     # TODO: Feat > format date to YYYY-MM-DD hh:mm:ss
     created_at: Mapped[datetime] = mapped_column(init=False, server_default=func.now())
