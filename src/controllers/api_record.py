@@ -3,7 +3,7 @@ from flask_restx import Resource, fields
 import json
 
 from api_swagger import api
-from services.service_time_record import *
+from services.service_record import *
 from dto.TimeRecord import (
     TimeRecordStartDto,
     TimeRecordEndDto,

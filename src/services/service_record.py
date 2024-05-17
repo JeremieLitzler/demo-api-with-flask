@@ -14,7 +14,7 @@ import dal.dal_time_record as dal_time_record
 import dal.dal_project as dal_project
 import dal.dal_task as dal_task
 import services.service_project as service_project
-import services.service_time_record as service_time_record
+import services.service_record as service_record
 from utils.validators import (
     validate_time_format,
     validate_date_format,
@@ -125,7 +125,7 @@ def start(jsonData: dict) -> None:
         print(ex)
         handle_ex(ex)
     finally:
-        print("finished calling service_time_record.create")
+        print("finished calling service_record.create")
 
 
 def get_one(id: str, noJson=False):
@@ -146,7 +146,7 @@ def get_one(id: str, noJson=False):
         print(ex)
         handle_ex(ex)
     finally:
-        print("finished calling service_time_record.get_one")
+        print("finished calling service_record.get_one")
 
 
 def get_by_task(task_id: str) -> list[TimeRecord]:
@@ -158,7 +158,7 @@ def get_by_task(task_id: str) -> list[TimeRecord]:
         print(ex)
         handle_ex(ex)
     finally:
-        print("finished calling service_time_record.get_by_task")
+        print("finished calling service_record.get_by_task")
 
 
 def get_by_project(project_id: str) -> list[TimeRecord]:
@@ -170,7 +170,7 @@ def get_by_project(project_id: str) -> list[TimeRecord]:
         print(ex)
         handle_ex(ex)
     finally:
-        print("finished calling service_time_record.get_by_project")
+        print("finished calling service_record.get_by_project")
 
 
 def end_strickly_greater_than_start(
@@ -226,7 +226,7 @@ def update_one(id: str, jsonData: dict):
         print(ex)
         handle_ex(ex)
     finally:
-        print("finished calling service_time_record.update")
+        print("finished calling service_record.update")
 
 
 def stop(id: str, jsonData: dict) -> None:
@@ -250,7 +250,7 @@ def stop(id: str, jsonData: dict) -> None:
         print(ex)
         handle_ex(ex)
     finally:
-        print("finished calling service_time_record.stop")
+        print("finished calling service_record.stop")
 
 
 def update_notes(id: str, jsonData: dict) -> None:
@@ -271,7 +271,7 @@ def update_notes(id: str, jsonData: dict) -> None:
         print(ex)
         handle_ex(ex)
     finally:
-        print("finished calling service_time_record.update_notes")
+        print("finished calling service_record.update_notes")
 
 
 # TODO > Feat: cannot delete a task if records exist for the task
@@ -286,4 +286,4 @@ def delete_one(id: str) -> bool:
         print(ex)
         handle_ex(ex)
     finally:
-        print("finished calling service_time_record.delete")
+        print("finished calling service_record.delete")

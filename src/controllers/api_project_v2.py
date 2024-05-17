@@ -7,10 +7,8 @@ from api_swagger import api
 from app import app
 from constants.environment_vars import EnvironmentVariable
 from services.service_project_v2 import ProjectService
+from services.service_record_v2 import RecordService
 from dal.sqla_repository import SQLAlchemyRepository
-
-from services.service_time_record import get_by_project
-
 from dto.Project import (
     ProjectDto,
     ProjectRequestSwaggerModel,
@@ -32,7 +30,7 @@ class ProjectList(Resource):
     @ns.response(422, "Payload is invalid. See details in response.")
     def post(self):
         """Create a new project"""
-        response = ProjectService(repository).add(api.payload)
+        response = ProjectService(repository).create(api.payload)
         return response
 
     @ns.doc("api_project_get_all")
@@ -73,13 +71,13 @@ class Project(Resource):
         return response
 
 
-# @ns.route("/<string:id>/records")
-# @ns.response(404, "Project not found")
-# @ns.param("id", "The project identifier")
-# class ProjectRecords(Resource):
-#     @ns.doc("api_project_get_records")
-#     @ns.marshal_with(RecordResponseSwaggerModel)
-#     def get(self, id):
-#         """List all records of the project"""
-#         records = get_by_project(id)
-#         return records
+@ns.route("/<string:id>/records")
+@ns.response(404, "Project not found")
+@ns.param("id", "The project identifier")
+class ProjectRecords(Resource):
+    @ns.doc("api_project_get_records")
+    @ns.marshal_with(RecordResponseSwaggerModel)
+    def get(self, id):
+        """List all records of the project"""
+        records = RecordService(repository).get_by_project(id)
+        return records

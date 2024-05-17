@@ -81,7 +81,7 @@ Content-Type: application/json
 {
   "start_at_date":  "2024-05-03",
   "start_at_time": "10:29:00",
-  "projectId": "e5f816fe045d4b67abc7b2641ed3174b"
+  "projectId": "d3c7e5c651d24566a344b96463527545"
 }
 
 ### List records for existant project

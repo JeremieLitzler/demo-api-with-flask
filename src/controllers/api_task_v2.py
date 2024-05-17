@@ -1,14 +1,24 @@
+import json
 from flask import request, jsonify
 from flask_restx import Resource, fields
-import json
+from sqlalchemy.orm import scoped_session
 
 from api_swagger import api
-from services.service_task import *
-from services.service_record import get_by_task
+from app import app
+from constants.environment_vars import EnvironmentVariable
+from services.service_task_v2 import TaskService
+from services.service_record_v2 import RecordService
+from services.service_project_v2 import ProjectService
+
+from dal.sqla_repository import SQLAlchemyRepository
 from dto.Task import TaskDto, TaskRequestSwaggerModel, TaskResponseSwaggerModel
 from dto.TimeRecord import RecordResponseSwaggerModel
 
-ns = api.namespace("api/v1.0/tasks", description="Task operations")
+session_db: scoped_session = app.config[EnvironmentVariable.SESSION_LOCAL]
+repository: SQLAlchemyRepository = SQLAlchemyRepository(session_db)
+
+ns = api.namespace("api/v2.0/tasks", description="Task operations")
+_taskService = TaskService(repository, ProjectService(repository))
 
 
 @ns.route("/")
@@ -19,14 +29,14 @@ class TaskList(Resource):
     @ns.response(422, "Payload is invalid. See details in response.")
     def post(self):
         """Create a new task"""
-        response = create(api.payload)
+        response = _taskService.create(api.payload)
         return response
 
     @ns.doc("api_task_get_all")
     @ns.marshal_with(TaskResponseSwaggerModel)
     def get(self):
         """List all the tasks"""
-        tasks = get_all()
+        tasks = _taskService.get_all()
         return tasks
 
 
@@ -39,7 +49,7 @@ class Task(Resource):
     @ns.marshal_with(TaskResponseSwaggerModel)
     def get(self, id):
         """Retrieve a single task"""
-        response = get_one(id)
+        response = _taskService.get_one(id)
         return response
 
     @ns.doc("api_task_update")
@@ -48,14 +58,14 @@ class Task(Resource):
     @ns.response(422, "Payload is invalid. See details in response.")
     def put(self, id):
         """Update a task"""
-        response = update_one(id, api.payload)
+        response = _taskService.update_one(id, api.payload)
         return response
 
     @ns.doc("api_task_delete")
     @ns.response(204, "Task deleted")
     def delete(self, id):
         """Delete a task"""
-        response = delete_one(id)
+        response = _taskService.delete_one(id)
         return response
 
 
@@ -67,5 +77,5 @@ class TaskRecords(Resource):
     @ns.marshal_with(RecordResponseSwaggerModel)
     def get(self, id):
         """List all records of the task"""
-        records = get_by_task(id)
+        records = RecordService(repository).get_by_task(id)
         return records

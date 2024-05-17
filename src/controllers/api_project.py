@@ -4,7 +4,7 @@ import json
 
 from api_swagger import api
 from services.service_project import *
-from services.service_time_record import get_by_project
+from services.service_record import get_by_project
 from dto.Project import (
     ProjectDto,
     ProjectRequestSwaggerModel,

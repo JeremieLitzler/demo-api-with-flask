@@ -1,11 +1,4 @@
-from pathlib import Path
 from flask import jsonify, request
-
-import sqlite3
-import os
-import uuid
-import json
-
 from sqlalchemy.orm import scoped_session
 
 from interfaces import IRepository
@@ -31,11 +24,17 @@ class ProjectService:
         if data.color.strip() == "":
             raise_business_error(id, False, "Color is empty", 422)
 
-    def add(self, jsonData: dict) -> None:
+    def create(self, jsonData: dict) -> Project:
         try:
             project_data = ProjectDto.parseJson(jsonData)
             # TODO: Feat > automap the Dto to Model
             self.validate(project_data)
+            project_name_exists = self._repository.set_model(Project).fetch_one_by_col(
+                "name", project_data.name
+            )
+            if project_name_exists is not None:
+                raise_business_error(None, False, "Project name is already taken", 422)
+
             new_project = Project(name=project_data.name, color=project_data.color)
             inserted_project = self._repository.add(new_project)
             return inserted_project, 201
@@ -45,7 +44,7 @@ class ProjectService:
         finally:
             print("finished calling create_project")
 
-    def get_one(self, id: str, noJson=False) -> ProjectDto:
+    def get_one(self, id: str, noJson=False) -> Project:
         if id.strip() == "":
             raise_business_error(id, False, "ID is required", 422)
 
@@ -63,7 +62,10 @@ class ProjectService:
         finally:
             print("finished calling get_project")
 
-    def get_all(self) -> list[ProjectDto]:
+    def get_one_by_attr(self, attr: str, attr_value: str):
+        project = self._repository.set_model(Project).f(id)
+
+    def get_all(self) -> list[Project]:
         try:
             projects = self._repository.set_model(Project).fetch_all()
             return projects
@@ -73,7 +75,7 @@ class ProjectService:
         finally:
             print("finished calling get_projects")
 
-    def update_one(self, id: str, jsonData: dict) -> None:
+    def update_one(self, id: str, jsonData: dict) -> Project:
         try:
             project = self._repository.set_model(Project).fetch_one(id)
             if project == None:
@@ -85,8 +87,7 @@ class ProjectService:
             if project_data.color is not None:
                 project.color = project_data.color
 
-            self._repository.update()
-            return project
+            return self._repository.update(project)
         except Exception as ex:
             print(ex)
             handle_ex(ex)

@@ -31,7 +31,7 @@ Content-Type: application/json
   "color": ""
 }
 
-### Add a valid project
+### Add a valid project (if running again, the API will reply 422 "Project name is already taken")
 POST http://127.0.0.1:5000/api/v2.0/projects HTTP/1.1
 Content-Type: application/json
 
@@ -45,11 +45,11 @@ GET http://127.0.0.1:5000/api/v2.0/projects HTTP/1.1
 content-type: application/json
 
 ### Read a project
-GET http://127.0.0.1:5000/api/v2.0/projects/48f0e43f763a415ca0d32604a03ab7d0 HTTP/1.1
+GET http://127.0.0.1:5000/api/v2.0/projects/e62e0b5cc08a48cc9afb9faaec5428f3 HTTP/1.1
 content-type: application/json
 
 ###  Update a project name
-PUT http://127.0.0.1:5000/api/v2.0/projects/48f0e43f763a415ca0d32604a03ab7d0 HTTP/1.1
+PUT http://127.0.0.1:5000/api/v2.0/projects/e62e0b5cc08a48cc9afb9faaec5428f3 HTTP/1.1
 content-type: application/json
 
 {
@@ -57,7 +57,7 @@ content-type: application/json
 }
 
 ### Update a project name and color
-PUT http://127.0.0.1:5000/api/v2.0/projects/48f0e43f763a415ca0d32604a03ab7d0 HTTP/1.1
+PUT http://127.0.0.1:5000/api/v2.0/projects/e62e0b5cc08a48cc9afb9faaec5428f3 HTTP/1.1
 content-type: application/json
 
 {
@@ -68,5 +68,5 @@ content-type: application/json
 ### TODO > Add an endpoint to archive a project
 
 ### Delete a project
-DELETE http://127.0.0.1:5000/api/v2.0/projects/48f0e43f763a415ca0d32604a03ab7d0 HTTP/1.1
+DELETE http://127.0.0.1:5000/api/v2.0/projects/e62e0b5cc08a48cc9afb9faaec5428f3 HTTP/1.1
 content-type: application/json
