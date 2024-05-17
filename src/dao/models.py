@@ -28,6 +28,9 @@ class Project(Model):
     __tablename__ = "boosted_web_project"
 
     # BTW: init=False means don't make this column part of the constructor
+    # BTW: for string columns, specify the length so that it works with MySql driver,
+    #      though SQLLite doesn't require it
+    # See https://docs.sqlalchemy.org/en/20/orm/declarative_tables.html#declarative-table-with-mapped-column
     id: Mapped[str] = mapped_column(
         String(32),
         primary_key=True,
