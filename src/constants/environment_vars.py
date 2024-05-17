@@ -1,5 +1,6 @@
 class EnvironmentVariable:
     ENVIRONMENT = "ENVIRONMENT"
+    IS_DEBUG = "IS_DEBUG"
     DATABASE_ENGINE = "DATABASE_ENGINE"
     PY_DB_NAME = "PY_DB_NAME"
     PY_DB_HOST = "PY_DB_HOST"
